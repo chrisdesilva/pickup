@@ -1,18 +1,22 @@
 import React from "react"
-import courtList from './CourtList'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBasketballBall } from '@fortawesome/free-solid-svg-icons'
+import { Header, Image, Modal } from 'semantic-ui-react'
 
 const FindACourt = props => {
 
-const showDetails = () => {
-    console.log(props.name)
-}
-
-
     return (
-        <div onClick={showDetails}>
-            <FontAwesomeIcon icon={faBasketballBall} />
+        <div>
+          <Modal trigger={<FontAwesomeIcon icon={faBasketballBall} />}>
+            <Modal.Content image>
+            <Image wrapped size='medium' src={props.image} />
+            <Modal.Description>
+                <Header>{props.name}</Header>
+                <p>{props.address}</p>
+            </Modal.Description>
+            </Modal.Content>
+        </Modal>
+            
         </div>
       );
 

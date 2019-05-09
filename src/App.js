@@ -4,6 +4,7 @@ import courtList from './CourtList'
 import FindACourt from './FindACourt';
  
 const MyLocation = () => <div>My Location</div>;
+const API_KEY = `${process.env.REACT_APP_API_KEY}`
  
 class App extends Component {
   static defaultProps = {
@@ -25,13 +26,15 @@ class App extends Component {
     );
 }
 
+
+
  
   render() {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '90%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBJxTAYmMdPWBL8jO2dUNGWwz7_fgivWFs' }}
+          bootstrapURLKeys={{ key: API_KEY }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
@@ -41,6 +44,8 @@ class App extends Component {
             lat={court.latitude}
             lng={court.longitude}
             name={court.name}
+            address={court.address}
+            image={court.image}
           />
         })}
           <MyLocation
