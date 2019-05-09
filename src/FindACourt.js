@@ -1,13 +1,12 @@
 import React from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBasketballBall } from '@fortawesome/free-solid-svg-icons'
+import { Icon } from 'semantic-ui-react'
 import { Header, Image, Modal } from 'semantic-ui-react'
 
 const FindACourt = props => {
 
     return (
         <div>
-          <Modal trigger={<FontAwesomeIcon icon={faBasketballBall} />}>
+          <Modal trigger={<Icon inverted name="basketball ball" size="large" color="orange"/>}>
             <Modal.Content image>
             <Image wrapped size='medium' src={props.image} />
             <Modal.Description>

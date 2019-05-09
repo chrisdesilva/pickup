@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { Icon } from 'semantic-ui-react'
 import courtList from './CourtList'
 import FindACourt from './FindACourt';
  
-const MyLocation = () => <div>My Location</div>;
+const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
 const API_KEY = `${process.env.REACT_APP_API_KEY}`
  
 class App extends Component {
