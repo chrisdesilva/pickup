@@ -1,12 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
 h1, h2 {
-  margin: 0
+  margin: 0;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+#about {
+  background: black;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+#banner {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, .2), rgba(0, 0, 0, .7)), url('../Images/basketball.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70vh;
+}
+
+#btn-find {
+  margin: 3rem 0;
 }
 
 #container {
   height: 100vh;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, .2), rgba(0, 0, 0, .7)), url('../Images/basketball.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: black;
+  color:#e6dfdf;
   text-align: center;
+  letter-spacing: .5px;
+}
+
+#footer {
+  height: 200px;
+  background-color: #e6dfdf;
+}
+
+#h2 {
+  font-family: 'Fjalla One', sans-serif;
+  letter-spacing: 1.5px;
 }
