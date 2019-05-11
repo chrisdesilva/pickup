@@ -14,7 +14,7 @@ const FindACourt = props => {
                 <p>{props.address}</p>
             </Modal.Description>
             </Modal.Content>
-        </Modal>
+           </Modal>
             
         </div>
       );
