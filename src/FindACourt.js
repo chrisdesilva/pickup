@@ -12,6 +12,7 @@ const FindACourt = props => {
             <Modal.Description>
                 <Header>{props.name}</Header>
                 <p>{props.address}</p>
+                {props.url && <a href={props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             </Modal.Description>
             </Modal.Content>
            </Modal>

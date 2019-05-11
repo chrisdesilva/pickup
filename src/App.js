@@ -39,7 +39,9 @@ class App extends Component {
     this.setState({
       showCourts: true
     })
-    console.log(Math.abs(courtList[1].latitude - this.state.center.lat))
+    console.log(courtList[2].name)
+    console.log(Math.abs(courtList[2].latitude - this.state.center.lat))
+    console.log(Math.abs(courtList[2].longitude - this.state.center.lng))
   }
 
   render() {
@@ -51,18 +53,20 @@ class App extends Component {
           defaultZoom={this.props.zoom}
           yesIWantToUseGoogleMapApiInternals
         >
-          {this.state.showCourts && courtList.map(court => {
-            return (Math.abs(court.latitude - this.state.center.lat <= .4337015) && Math.abs(court.longitude - this.state.center.lng <= .4337015) &&
-              <FindACourt
-                lat={court.latitude}
-                lng={court.longitude}
-                name={court.name}
-                address={court.address}
-                image={court.image}
-              /> 
-            )
-          })}
-          <MyLocation lat={this.state.lat} lng={this.state.lng} />
+          {courtList.filter( court => Math.abs((court.latitude - this.state.center.lat) <= .4337015) && Math.abs((court.longitude - this.state.center.lng) <= .4337015))
+            .map(court => {
+              return <FindACourt
+              lat={court.latitude}
+              lng={court.longitude}
+              name={court.name}
+              address={court.address}
+              image={court.image}
+              url={court.mapsURL}
+            />
+             
+            } 
+          )}
+          <MyLocation lat={this.state.center.lat} lng={this.state.center.lng} />
         </GoogleMapReact>
         <button onClick={this.findCourts}>Find Courts</button>
       </div>
