@@ -16,7 +16,6 @@ const FindACourt = props => {
             </Modal.Description>
             </Modal.Content>
            </Modal>
-            
         </div>
       );
 

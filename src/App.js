@@ -1,7 +1,8 @@
 import React, { Component } from "react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import './App.css'
 import Map from './Components/Map'
-import Homepage from "./Components/Homepage";
+import Homepage from "./Components/Homepage"
 
 class App extends Component {
 
@@ -9,8 +10,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path ="/" component={Homepage} />
-          <Route path ="/courts" component={Map} />
+          <Switch>
+            <Route exact path ="/" component={Homepage} />
+            <Route path ="/courts" component={Map} />
+          </Switch>
         </div>
       </Router>
     );

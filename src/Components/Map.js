@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import './Map.css';
 import courtList from "../CourtList";
 import FindACourt from "./FindACourt";
 
@@ -43,7 +44,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div style={{ height: "90vh", width: "100%" }}>
+      <div style={{ height: "80vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY }}
           center={this.state.center}
@@ -65,7 +66,17 @@ class Map extends Component {
           )}
           <MyLocation lat={this.state.center.lat} lng={this.state.center.lng} />
         </GoogleMapReact>
-        <Button onClick={this.findCourts}>Show Nearby Courts</Button>
+        <div id="modalContainer">
+          <Modal trigger={<Button color="orange" onClick={this.findCourts}>Show Nearby Courts</Button>}>
+            <Modal.Content>
+            <Modal.Description>
+                <Header>Nearby Courts</Header>
+                <p>To find nearby courts, close this modal and move the map around.</p>
+                <p>Look for the <Icon inverted name="basketball ball" size="large" color="orange"/> and click/tap to open information</p>
+            </Modal.Description>
+            </Modal.Content>
+          </Modal>
+        </div>
       </div>
     );
   }
