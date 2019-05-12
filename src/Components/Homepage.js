@@ -4,6 +4,7 @@ import { Button, Grid } from 'semantic-ui-react'
 import About from './About'
 import Footer from './Footer'
 import './Homepage.css'
+import AddCourt from './AddCourt';
 
 const Homepage = () => {
   
@@ -20,6 +21,9 @@ const Homepage = () => {
       </Grid.Row>
       <Grid.Row id="about">
         <About />
+      </Grid.Row>
+      <Grid.Row id="addCourt">
+        <AddCourt />
       </Grid.Row>
       <Grid.Row id="footer">
         <Grid.Column>
