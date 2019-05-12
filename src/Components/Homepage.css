@@ -34,9 +34,22 @@ h1 {
 #footer {
   height: 200px;
   background-color: #e6dfdf;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 #h2 {
   font-family: 'Fjalla One', sans-serif;
   letter-spacing: 1.5px;
+}
+
+#icon {
+  transition: all 300ms;
+}
+
+#icon:hover {
+  transform: scale(1.1);
 }

@@ -67,7 +67,7 @@ class Map extends Component {
           <MyLocation lat={this.state.center.lat} lng={this.state.center.lng} />
         </GoogleMapReact>
         <div id="modalContainer">
-          <Modal trigger={<Button color="orange" onClick={this.findCourts}>Show Nearby Courts</Button>}>
+          <Modal trigger={<Button color="orange" onClick={this.findCourts}>Show Nearby Courts</Button>} closeIcon>
             <Modal.Content>
             <Modal.Description>
                 <Header>Nearby Courts</Header>

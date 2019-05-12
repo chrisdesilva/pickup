@@ -22,7 +22,9 @@ const Homepage = () => {
         <About />
       </Grid.Row>
       <Grid.Row id="footer">
-        <Footer />
+        <Grid.Column>
+          <Footer />
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   )

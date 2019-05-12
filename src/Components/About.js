@@ -4,6 +4,7 @@ import basketball from '../Images/solo-man.jpg'
 
 const style = {
   textAlign: 'left',
+  margin: '2rem 0',
   header: {
     margin: '2rem 0',
     fontSize: '2.5rem'
@@ -23,7 +24,7 @@ const About = () => {
     <Container style={style.container}>
     <Header style={style.header} as='h2' id="h2" inverted textAlign='center'>About</Header>
       <Grid stackable>
-        <Grid.Row centered style={style} columns={2}>
+        <Grid.Row verticalAlign="middle" centered style={style} columns={2}>
           <Grid.Column>
           <p style={style.p}>Pick-up is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. We make it easy to find the place so you can get out and play.</p>
           </Grid.Column>
