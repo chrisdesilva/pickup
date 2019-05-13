@@ -32,6 +32,10 @@ h1 {
   justify-content: center;
 }
 
+#addIcon:hover {
+  cursor: pointer;
+}
+
 #banner {
   background-image: linear-gradient(to right, rgba(255, 255, 255, .2), rgba(0, 0, 0, .7)), url('../Images/basketball.jpg');
   background-repeat: no-repeat;
