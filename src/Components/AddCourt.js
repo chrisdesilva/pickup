@@ -1,7 +1,10 @@
 import React from 'react'
-import { Container, Form, Grid, Header, Image } from 'semantic-ui-react'
+import Geocode from 'react-geocode'
+import { Button, Container, Form, Grid, Header, Icon, Image } from 'semantic-ui-react'
 import db from '../fire'
 import courtPhoto from '../Images/beach-court.jpg'
+
+Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)
 
 const style = {
   header: {
@@ -33,6 +36,23 @@ class AddCourt extends React.Component {
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  getLatAndLng = () => Geocode.fromAddress(this.state.address).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location
+      this.setState({
+        latitude: lat,
+        longitude: lng
+      })
+      console.log(lat, lng)
+    },
+    error => {
+      this.setState({
+        latitude: 'invalid address',
+        longitude: 'check street address field'
+      })
+    }
+  )
 
   // make reference to courts collection on Firebase, add state object to database
   addCourt = e => {
@@ -121,19 +141,18 @@ class AddCourt extends React.Component {
                   width={16}
                 />
               </Form.Group>
+              <p style={style.p}>Click the icon <Icon color="black" name="map marker alternate" onClick={this.getLatAndLng}/> to get latitude and longitude from address</p>
               <Form.Group>
                 <Form.Input
-                  label='Enter latitude of court'
+                  label='Latitude of court'
                   name='latitude'
-                  type='number'
                   value={this.state.latitude}
                   onChange={this.handleChange}
                   width={8}
                 />
                 <Form.Input
-                  label='Enter longitude of court'
+                  label='Longitude of court'
                   name='longitude'
-                  type='number'
                   value={this.state.longitude}
                   onChange={this.handleChange}
                   width={8}
