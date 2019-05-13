@@ -11,10 +11,10 @@ const Footer = () => {
   return (
     <Grid id="footer">
       <Grid.Row style={style.row}>
-       Contribute at<a href="https://github.com/chrisdesilva/pickup" target="_blank" rel="noopener noreferrer"><Icon name="github" size="large" color="black" id="icon"/></a>
+       <p>Contribute at <a href="https://github.com/chrisdesilva/pickup" target="_blank" rel="noopener noreferrer"><Icon name="github" size="large" color="orange" id="icon"/></a></p>
       </Grid.Row>
       <Grid.Row style={style.row}>
-        <Icon name="copyright outline" color="black"/> Chris DeSilva
+        <Icon name="copyright outline" color="white"/> <a href="https://desilvadev.com" target="_blank" rel="noopener noreferrer">Chris DeSilva</a>
       </Grid.Row>
     </Grid>
   )
