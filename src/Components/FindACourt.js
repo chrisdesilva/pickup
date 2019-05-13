@@ -1,6 +1,7 @@
 import React from "react"
 import { Icon } from 'semantic-ui-react'
 import { Header, Image, Modal } from 'semantic-ui-react'
+import './Map.css'
 
 const FindACourt = props => {
 
@@ -12,7 +13,7 @@ const FindACourt = props => {
             <Modal.Description>
                 <Header>{props.name}</Header>
                 <p>{props.address}</p>
-                {props.url && <a href={props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
+                {props.url && <a id="mapsLink" href={props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             </Modal.Description>
             </Modal.Content>
            </Modal>

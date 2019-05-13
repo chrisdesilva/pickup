@@ -4,12 +4,20 @@ a {
   color: #e6dfdf ;
 }
 
+div {
+  font-family: 'Fjalla One', sans-serif;
+}
+
 h1, h2 {
   margin: 0;
 }
 
 h1 {
   font-size: 5rem;
+}
+
+.ui .header {
+  font-family: 'Fjalla One', sans-serif;
 }
 
 #about {
