@@ -20,6 +20,9 @@ const style = {
   button: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  form: {
+    padding: '0 3rem'
   }
 }
 
@@ -95,7 +98,7 @@ class AddCourt extends React.Component {
             <Image alt="Aerial view of a basketball court" rounded src={courtPhoto} />
             </Grid.Column>
           <Grid.Column>
-            <Form onSubmit={this.addCourt}>
+            <Form onSubmit={this.addCourt} style={style.form}>
               <Form.Group>
                 <Form.Input 
                   placeholder='Name of court' 
