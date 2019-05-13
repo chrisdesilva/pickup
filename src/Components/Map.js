@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
 import FindACourt from "./FindACourt";
@@ -26,6 +27,7 @@ class Map extends Component {
     Courts: []
   };
 
+  // get current user location and set map to center on that location
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(success =>
       this.setState({
@@ -35,10 +37,10 @@ class Map extends Component {
         }
       })
     );
+    // pull data from database to have courts ready for display when component is ready
     db.collection('courts').get()
       .then(querySnapshot => {
         const Courts = []
-
         querySnapshot.forEach(function(doc) {
           Courts.push({
             address: doc.data().address,
@@ -98,6 +100,9 @@ class Map extends Component {
             </Modal.Description>
             </Modal.Content>
           </Modal>
+          <Link to="/">
+              <Button secondary>Home Page</Button>
+          </Link>
         </div>
       </div>
     );

@@ -29,7 +29,7 @@ const About = () => {
           <p style={style.p}>Pick-up is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. We make it easy to find the place so you can get out and play.</p>
           </Grid.Column>
           <Grid.Column>
-            <Image src={basketball} />
+            <Image rounded src={basketball} alt="Man preparing to shoot a basketball" />
           </Grid.Column>
         </Grid.Row>
       </Grid>

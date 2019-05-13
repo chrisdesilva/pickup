@@ -15,8 +15,8 @@ const Homepage = () => {
           <h1>Pick-up</h1>
           <h2>We find the court. You bring the game.</h2>
           <Link to="/courts">
-          <Button id="btn-find" color="orange">Find a Court</Button>
-        </Link>
+           <Button id="btn-find" color="orange">Find a Court</Button>
+          </Link>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row id="about">
