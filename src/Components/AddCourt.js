@@ -1,6 +1,6 @@
 import React from 'react'
 import Geocode from 'react-geocode'
-import { Button, Container, Form, Grid, Header, Icon, Image } from 'semantic-ui-react'
+import { Container, Form, Grid, Header, Icon, Image } from 'semantic-ui-react'
 import db from '../fire'
 import courtPhoto from '../Images/beach-court.jpg'
 

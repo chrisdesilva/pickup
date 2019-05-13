@@ -14,7 +14,7 @@ const Footer = () => {
        <p>Contribute at <a href="https://github.com/chrisdesilva/pickup" target="_blank" rel="noopener noreferrer"><Icon name="github" size="large" color="orange" id="icon"/></a></p>
       </Grid.Row>
       <Grid.Row style={style.row}>
-        <Icon name="copyright outline" color="white"/> <a href="https://desilvadev.com" target="_blank" rel="noopener noreferrer">Chris DeSilva</a>
+        <Icon name="copyright outline"/> <a href="https://desilvadev.com" target="_blank" rel="noopener noreferrer">Chris DeSilva</a>
       </Grid.Row>
     </Grid>
   )

@@ -40,7 +40,7 @@ h1 {
 }
 
 #btn-find {
-  margin: 3rem 0;
+  margin: 3rem 0 1rem 0;
 }
 
 #container {
@@ -52,7 +52,7 @@ h1 {
 
 #footer {
   height: 200px;
-  background-color: black;
+  background-color: #222222;
   color: #e6dfdf;;
   display: flex;
   justify-content: center;
