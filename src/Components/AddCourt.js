@@ -1,12 +1,30 @@
-import React, { useState } from 'react'
-import { Form } from 'semantic-ui-react'
+import React from 'react'
+import { Container, Form, Header } from 'semantic-ui-react'
 import db from '../fire'
+
+const style = {
+  textAlign: 'left',
+  margin: '2rem 0',
+  header: {
+    margin: '2rem 0',
+    fontSize: '2.5rem',
+    color: 'black'
+  },
+  p: {
+    fontSize: '1.25rem',
+    padding: '0 3rem '
+  },
+  container: {
+    padding: '2rem 0'
+  }
+}
 
 class AddCourt extends React.Component {
 
   state = {
       name: '',
       address: '',
+      zip: '',
       image: '',
       latitude: 0,
       longitude: 0,
@@ -20,6 +38,7 @@ class AddCourt extends React.Component {
     db.collection('courts').add({
       name: this.state.name,
       address: this.state.address,
+      zip: this.state.zip,
       image: this.state.image,
       latitude: Number(this.state.latitude),
       longitude: Number(this.state.longitude),
@@ -31,53 +50,89 @@ class AddCourt extends React.Component {
     .catch(function(error) {
       console.error("Error: ", error)
     })
+
+    this.setState({
+      name: '',
+      address: '',
+      zip: '',
+      image: '',
+      latitude: 0,
+      longitude: 0,
+      mapsURL: ''
+    })
   }
 
   render() {
     return (
-      <Form onSubmit={this.addCourt}>
-      <Form.Group>
-        <Form.Input 
-          placeholder='Name of court' 
-          name='name' 
-          value={this.state.name} 
-          onChange={this.handleChange} 
-        />
-        <Form.Input
-          placeholder='Address of court'
-          name='address'
-          value={this.state.address}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          placeholder='Copy and paste image URL'
-          name='image'
-          value={this.state.image}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          placeholder='Latitude of court'
-          name='latitude'
-          type='number'
-          value={this.state.latitude}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          placeholder='Longitude of court'
-          name='longitude'
-          type='number'
-          value={this.state.longitude}
-          onChange={this.handleChange}
-        />
-        <Form.Input
-          placeholder='Copy and paste Google Maps URL'
-          name='mapsURL'
-          value={this.state.mapsURL}
-          onChange={this.handleChange}
-        />
-        <Form.Button content='Submit' />
-      </Form.Group>
-    </Form>  
+      <Container>
+      <Header style={style.header} as='h2' id="h2" inverted textAlign='center'>Add A Court</Header>
+        <Form onSubmit={this.addCourt}>
+        <Form.Group>
+          <Form.Input 
+            placeholder='Name of court' 
+            name='name' 
+            value={this.state.name} 
+            onChange={this.handleChange} 
+            width={16}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            placeholder='Street address (number and name)'
+            name='address'
+            value={this.state.address}
+            onChange={this.handleChange}
+            width={16}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            placeholder='Zip Code'
+            name='zip'
+            value={this.state.zip}
+            onChange={this.handleChange}
+            width={16}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            placeholder='Copy and paste Google Maps URL'
+            name='mapsURL'
+            value={this.state.mapsURL}
+            onChange={this.handleChange}
+            width={16}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            placeholder='Copy and paste image URL'
+            name='image'
+            value={this.state.image}
+            onChange={this.handleChange}
+            width={16}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Input
+            label='Enter latitude of court'
+            name='latitude'
+            type='number'
+            value={this.state.latitude}
+            onChange={this.handleChange}
+            width={8}
+          />
+          <Form.Input
+            label='Enter longitude of court'
+            name='longitude'
+            type='number'
+            value={this.state.longitude}
+            onChange={this.handleChange}
+            width={8}
+          />
+        </Form.Group>
+          <Form.Button content='Submit' secondary />
+      </Form> 
+    </Container> 
     )
   }
 }

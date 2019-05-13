@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 
+a {
+  color: #e6dfdf ;
+}
+
 h1, h2 {
   margin: 0;
 }
@@ -11,6 +15,13 @@ h1 {
 #about {
   background: black;
   font-family: 'Fjalla One', sans-serif;
+}
+
+#addCourt {
+  font-family: 'Fjalla One', sans-serif;
+  background: #e6dfdf;
+  display: flex;
+  justify-content: center;
 }
 
 #banner {
@@ -33,8 +44,8 @@ h1 {
 
 #footer {
   height: 200px;
-  background-color: #e6dfdf;
-  color: black;
+  background-color: black;
+  color: #e6dfdf;;
   display: flex;
   justify-content: center;
   align-items: center;
