@@ -32,7 +32,7 @@ class AddCourt extends React.Component {
       image: '',
       latitude: 0,
       longitude: 0,
-      mapsURL: ''
+      mapsURL: 'https://maps.google.com?q='
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -64,7 +64,7 @@ class AddCourt extends React.Component {
       image: this.state.image,
       latitude: Number(this.state.latitude),
       longitude: Number(this.state.longitude),
-      mapsURL: this.state.mapsURL
+      mapsURL: this.state.mapsURL + this.state.address + this.state.zip
     })
     .then(function(docRef) {
       console.log("ID: ", docRef.id)
@@ -103,15 +103,17 @@ class AddCourt extends React.Component {
                   value={this.state.name} 
                   onChange={this.handleChange} 
                   width={16}
+                  required
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Input
-                  placeholder='Street address (number and name)'
+                  placeholder='Street address with city and state'
                   name='address'
                   value={this.state.address}
                   onChange={this.handleChange}
                   width={16}
+                  required
                 />
               </Form.Group>
               <Form.Group>
@@ -121,24 +123,17 @@ class AddCourt extends React.Component {
                   value={this.state.zip}
                   onChange={this.handleChange}
                   width={16}
+                  required
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Input
-                  placeholder='Copy and paste Google Maps URL'
-                  name='mapsURL'
-                  value={this.state.mapsURL}
-                  onChange={this.handleChange}
-                  width={16}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Input
-                  placeholder='Copy and paste image URL'
+                  placeholder="Copy and paste image url"
                   name='image'
                   value={this.state.image}
                   onChange={this.handleChange}
                   width={16}
+                  required
                 />
               </Form.Group>
               <p style={style.p}>Click the icon <Icon color="black" name="map marker alternate" onClick={this.getLatAndLng}/> to get latitude and longitude from address</p>
@@ -149,6 +144,7 @@ class AddCourt extends React.Component {
                   value={this.state.latitude}
                   onChange={this.handleChange}
                   width={8}
+                  required
                 />
                 <Form.Input
                   label='Longitude of court'
@@ -156,6 +152,7 @@ class AddCourt extends React.Component {
                   value={this.state.longitude}
                   onChange={this.handleChange}
                   width={8}
+                  required
                 />
               </Form.Group>
               <div style={style.button} >
