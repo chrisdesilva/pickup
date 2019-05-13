@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import db from '../fire'
 import './Map.css';
-import courtList from "../CourtList";
 import FindACourt from "./FindACourt";
 
 const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
@@ -22,7 +22,8 @@ class Map extends Component {
       lat: "",
       lng: ""
     },
-    showCourts: false
+    showCourts: false,
+    Courts: []
   };
 
   componentDidMount() {
@@ -34,6 +35,27 @@ class Map extends Component {
         }
       })
     );
+    db.collection('courts').get()
+      .then(querySnapshot => {
+        const Courts = []
+
+        querySnapshot.forEach(function(doc) {
+          Courts.push({
+            address: doc.data().address,
+            image: doc.data().image,
+            latitude: doc.data().latitude,
+            longitude: doc.data().longitude,
+            mapsURL: doc.data().mapsURL,
+            name: doc.data().name,
+            zip: doc.data().zip
+          })
+        })
+        this.setState({ Courts })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+
   }
 
   findCourts = () => {
@@ -51,7 +73,7 @@ class Map extends Component {
           defaultZoom={this.props.zoom}
           yesIWantToUseGoogleMapApiInternals
         >
-          {this.state.showCourts && courtList.filter( court => Math.abs((court.latitude - this.state.center.lat) <= .4337015) && Math.abs((court.longitude - this.state.center.lng) <= .4337015))
+          {this.state.showCourts && this.state.Courts
             .map(court => {
               return <FindACourt
               lat={court.latitude}
