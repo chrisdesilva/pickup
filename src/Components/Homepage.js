@@ -43,12 +43,12 @@ const Homepage = () => {
           </Button.Group>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row id="about">
-         <About />
-      </Grid.Row>
       {login && <Grid.Row id="addCourt">
         <AddCourt />
       </Grid.Row>}
+      <Grid.Row id="about">
+         <About />
+      </Grid.Row>
       <Grid.Row id="footer">
         <Grid.Column>
           <Footer />
