@@ -1,6 +1,6 @@
 import React from 'react'
 import Geocode from 'react-geocode'
-import { Container, Form, Grid, Header, Icon, Image } from 'semantic-ui-react'
+import { Button, Container, Form, Grid, Header, Image } from 'semantic-ui-react'
 import db from '../fire'
 import courtPhoto from '../Images/beach-court.jpg'
 
@@ -35,24 +35,27 @@ class AddCourt extends React.Component {
       image: '',
       latitude: 0,
       longitude: 0,
-      mapsURL: 'https://maps.google.com?q='
+      mapsURL: 'https://maps.google.com?q=',
+      submitReady: false
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
+  // calculate latitude and longitude when user clicks confirm button, then switch button to submit by updating submitReady
   getLatAndLng = () => Geocode.fromAddress(this.state.address).then(
     response => {
       const { lat, lng } = response.results[0].geometry.location
       this.setState({
         latitude: lat,
-        longitude: lng
+        longitude: lng,
+        submitReady: true
       })
       console.log(lat, lng)
     },
     error => {
       this.setState({
         latitude: 'invalid address',
-        longitude: 'check street address field'
+        longitude: 'check street address field',
       })
       console.log(error)
     }
@@ -84,7 +87,8 @@ class AddCourt extends React.Component {
       image: '',
       latitude: 0,
       longitude: 0,
-      mapsURL: ''
+      mapsURL: '',
+      submitReady: false
     })
   }
 
@@ -140,10 +144,10 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
-              <div style={style.button} >
-                <Form.Button onMouseEnter={this.getLatAndLng} content='Submit' secondary />
-              </div>
             </Form> 
+            <div style={style.button} >
+              {!this.state.submitReady ? <Button color="red" onClick={this.getLatAndLng} content='Click To Confirm'/> : <Button color="green" onClick={this.addCourt} content='Submit' secondary />}
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
