@@ -54,6 +54,7 @@ class AddCourt extends React.Component {
         latitude: 'invalid address',
         longitude: 'check street address field'
       })
+      console.log(error)
     }
   )
 
@@ -139,27 +140,8 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
-              <p style={style.p}>Click the icon <Icon color="black" name="map marker alternate" onClick={this.getLatAndLng}/> to get latitude and longitude from address</p>
-              <Form.Group>
-                <Form.Input
-                  label='Latitude of court'
-                  name='latitude'
-                  value={this.state.latitude}
-                  onChange={this.handleChange}
-                  width={8}
-                  required
-                />
-                <Form.Input
-                  label='Longitude of court'
-                  name='longitude'
-                  value={this.state.longitude}
-                  onChange={this.handleChange}
-                  width={8}
-                  required
-                />
-              </Form.Group>
               <div style={style.button} >
-                <Form.Button content='Submit' secondary />
+                <Form.Button onMouseEnter={this.getLatAndLng} content='Submit' secondary />
               </div>
             </Form> 
           </Grid.Column>

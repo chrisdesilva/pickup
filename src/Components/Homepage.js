@@ -33,7 +33,7 @@ const Homepage = () => {
     <Grid verticalAlign="middle" id="container">
       <Grid.Row id="banner">
         <Grid.Column>
-          <h1>Pick-up</h1>
+          <h1>Pick-Up</h1>
           <h2>We find the court. You bring the game.</h2>
           <Button.Group vertical>
             <Link to="/courts">
