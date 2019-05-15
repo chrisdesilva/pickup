@@ -139,7 +139,7 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
-              <p style={style.p}>Click the icon <Icon color="orange" id="addIcon" name="map marker alternate" onClick={this.getLatAndLng}/> to get latitude and longitude from address</p>
+              <p style={style.p}>Click the icon <Icon color="black" name="map marker alternate" onClick={this.getLatAndLng}/> to get latitude and longitude from address</p>
               <Form.Group>
                 <Form.Input
                   label='Latitude of court'
