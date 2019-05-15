@@ -68,7 +68,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div style={{ height: "80vh", width: "100%" }}>
+      <div style={{ height: "80vh", width: "100vw" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY }}
           center={this.state.center}
@@ -95,6 +95,7 @@ class Map extends Component {
             <Modal.Content>
             <Modal.Description>
                 <Header>Nearby Courts</Header>
+                <p>**Location must be enabled to see map. Otherwise, you'll just see floating basketballs in a sea of gray.**</p>
                 <p>To find nearby courts, close this box and move the map around.</p>
                 <p>Look for the <Icon inverted name="basketball ball" size="large" color="orange"/> and click/tap to open information</p>
             </Modal.Description>
