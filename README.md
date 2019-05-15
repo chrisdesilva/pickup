@@ -8,7 +8,7 @@ I'd love your help with this project. The steps below should get you going. If n
 
 1. Fork the project by clicking the Fork button up at the top of the screen.
 2. Clone your fork with `git clone [code-you-copied-from-clone-button]`
-3. `cd open-jeopardy` to make sure you are in the right directory
+3. `cd pickup` to make sure you are in the right directory
 4. Add an `upstream` remote for keeping your local repo up-to-date:
   > `git remote add upstream https://github.com/chrisdesilva/pickup.git`
 5. Run `npm install` to install project dependencies.
