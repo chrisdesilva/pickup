@@ -1,26 +1,26 @@
 import React from "react"
-import { Icon } from 'semantic-ui-react'
-import { Header, Image, Modal } from 'semantic-ui-react'
+import CourtModal from './CourtModal'
 import './Map.css'
+
 
 const FindACourt = props => {
 
-    return (
-        <div>
-          <Modal trigger={<Icon inverted name="basketball ball" size="large" color="orange"/>}>
-            <Modal.Content image>
-            <Image wrapped size='medium' src={props.image} />
-            <Modal.Description>
-                <Header>{props.name}</Header>
-                <p>{props.address}</p>
-                {props.url && <a id="mapsLink" href={props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
-            </Modal.Description>
-            </Modal.Content>
-           </Modal>
-        </div>
-      );
 
-  
+  return (
+    <div>
+      <CourtModal 
+        src={props.image}
+        name={props.name}
+        address={props.address}
+        url={props.url}
+        lat={props.lat}
+        lng={props.lng}
+      />
+    </div>
+  );
+
 };
 
 export default FindACourt;
+
+

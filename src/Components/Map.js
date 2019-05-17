@@ -77,7 +77,7 @@ class Map extends Component {
         >
           {this.state.showCourts && this.state.Courts
             .map(court => {
-              return <FindACourt
+              return <FindACourt key={court.address}
               lat={court.latitude}
               lng={court.longitude}
               name={court.name}
