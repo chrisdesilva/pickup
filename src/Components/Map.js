@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { Button, Header, Icon, Modal } from "semantic-ui-react"
 import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
-import FindACourt from "./FindACourt";
+import FindACourt from "./FindACourt"
 
 const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
 const API_KEY = `${process.env.REACT_APP_API_KEY}`;
@@ -49,7 +49,9 @@ class Map extends Component {
             longitude: doc.data().longitude,
             mapsURL: doc.data().mapsURL,
             name: doc.data().name,
-            zip: doc.data().zip
+            zip: doc.data().zip,
+            gameDateTime: doc.data().dateTime,
+            id: doc.id
           })
         })
         this.setState({ Courts })
@@ -84,6 +86,8 @@ class Map extends Component {
               address={court.address}
               image={court.image}
               url={court.mapsURL}
+              gameDateTime={court.gameDateTime}
+              id={court.id}
             />
              
             } 

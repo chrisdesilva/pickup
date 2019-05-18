@@ -7,12 +7,14 @@
     "dotenv": "^8.0.0",
     "firebase": "^6.0.2",
     "google-map-react": "^1.1.4",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-geocode": "^0.1.2",
     "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
+    "semantic-ui-calendar-react": "^0.15.0",
     "semantic-ui-react": "^0.87.1"
   },
   "scripts": {
