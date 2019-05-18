@@ -9,12 +9,14 @@ const FindACourt = props => {
   return (
     <div>
       <CourtModal 
-        src={props.image}
+        image={props.image}
         name={props.name}
         address={props.address}
         url={props.url}
         lat={props.lat}
         lng={props.lng}
+        id={props.id}
+        gameDateTime={props.gameDateTime}
       />
     </div>
   );
