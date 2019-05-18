@@ -62,6 +62,30 @@ class Map extends Component {
 
   }
 
+  componentDidUpdate() {
+    db.collection('courts').get()
+      .then(querySnapshot => {
+        const Courts = []
+        querySnapshot.forEach(function(doc) {
+          Courts.push({
+            address: doc.data().address,
+            image: doc.data().image,
+            latitude: doc.data().latitude,
+            longitude: doc.data().longitude,
+            mapsURL: doc.data().mapsURL,
+            name: doc.data().name,
+            zip: doc.data().zip,
+            gameDateTime: doc.data().dateTime,
+            id: doc.id
+          })
+        })
+        this.setState({ Courts })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
+
   findCourts = () => {
     this.setState({
       showCourts: true

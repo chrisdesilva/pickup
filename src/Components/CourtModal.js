@@ -3,6 +3,7 @@ import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import db from '../fire'
 import './Map.css'
+import { async } from 'q';
 
 const API_KEY = `${process.env.REACT_APP_DARK_SKY_API_KEY}`
 
@@ -37,7 +38,7 @@ class CourtModal extends React.Component {
   handleScheduleGame = e => {
     e.preventDefault();
     db.collection('courts').doc(this.props.id).update({
-      dateTime: this.state.dateTime.toDate()
+      dateTime: this.state.dateTime
     })
     .then(function(docRef) {
       this.setState({error: null})
@@ -54,7 +55,7 @@ class CourtModal extends React.Component {
 
   
   getWeather = () => {
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
+     fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -97,8 +98,9 @@ class CourtModal extends React.Component {
               iconPosition="left"
               onChange={this.handleChange}
             />
-            <Button secondary type="submit">Schedule Game</Button>
-            {this.state.error && <p>{this.state.error}</p>}
+            <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} closeIcon basic size="small">
+              <Modal.Description><p style={{textAlign: 'right'}}>Successfully added</p></Modal.Description>
+            </Modal>
             <p>Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"}</p>
           </Form>
         </Modal.Actions>
