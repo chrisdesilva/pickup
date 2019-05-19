@@ -24,7 +24,7 @@ class CourtModal extends React.Component {
     showWeather: false,
     temp: '',
     conditions: '',
-    dateTime: [],
+    dateTime: '',
     error: null
   }
 
@@ -35,21 +35,17 @@ class CourtModal extends React.Component {
   }
 
   handleScheduleGame = e => {
-    e.preventDefault();
+    e.preventDefault()
     db.collection('courts').doc(this.props.id).update({
       dateTime: this.state.dateTime
     })
-    .then(function(docRef) {
-      this.setState({error: null})
-      console.log("ID: ", docRef.id)
-    })
-    .catch(function(error) {
-      console.error("Error: ", error)
-    })
-
     this.setState({
       dateTime: ''
     })
+  }
+
+  handleRemoveScheduledGame = () => {
+    console.log(this.props.id)
   }
 
   
@@ -97,10 +93,17 @@ class CourtModal extends React.Component {
               iconPosition="left"
               onChange={this.handleChange}
             />
-            <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} closeIcon basic size="small">
-              <Modal.Description><p style={{textAlign: 'right'}}>Successfully added</p></Modal.Description>
-            </Modal>
-            <p>Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"}</p>
+            {this.state.dateTime && <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} basic size="small">
+              <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
+            </Modal>}
+            <p>
+              Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
+              {this.props.gameDateTime && 
+                <Button onClick={this.handleRemoveScheduledGame} size="mini" secondary icon>
+                  <Icon name="delete" color="red"/>
+                </Button>
+              }
+            </p>
           </Form>
         </Modal.Actions>
        </Modal>
