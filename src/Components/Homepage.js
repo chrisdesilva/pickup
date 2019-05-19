@@ -37,9 +37,9 @@ const Homepage = () => {
           <h2>We find the court. You bring the game.</h2>
           <Button.Group vertical>
             <Link to="/courts">
-              <Button id="btn-find" color="orange">Find a Court</Button>
+              <Button id="btn-find" color="orange">Find A Court</Button>
             </Link>
-            {login ? <Button onClick={startLogout}>Log out</Button> : <Button onClick={startLogin}>Log in to add court</Button>}
+            {login ? <Button onClick={startLogout}>Log Out</Button> : <Button onClick={startLogin}>Log In With Google To Add Court</Button>}
           </Button.Group>
         </Grid.Column>
       </Grid.Row>

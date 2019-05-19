@@ -1,6 +1,6 @@
 import React from 'react'
 import Geocode from 'react-geocode'
-import { Button, Container, Form, Grid, Header, Image } from 'semantic-ui-react'
+import { Button, Container, Form, Grid, Header, Image, Message } from 'semantic-ui-react'
 import db from '../fire'
 import courtPhoto from '../Images/beach-court.jpg'
 
@@ -23,6 +23,11 @@ const style = {
   },
   form: {
     padding: '0 3rem'
+  },
+  message: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '1rem'
   }
 }
 
@@ -36,7 +41,8 @@ class AddCourt extends React.Component {
       latitude: 0,
       longitude: 0,
       mapsURL: 'https://maps.google.com?q=',
-      submitReady: false
+      submitReady: false,
+      showConfirmMsg: false
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -88,7 +94,8 @@ class AddCourt extends React.Component {
       latitude: 0,
       longitude: 0,
       mapsURL: '',
-      submitReady: false
+      submitReady: false,
+      showConfirmMsg: true
     })
   }
 
@@ -146,8 +153,14 @@ class AddCourt extends React.Component {
               </Form.Group>
             </Form> 
             <div style={style.button} >
-              {!this.state.submitReady ? <Button color="red" onClick={this.getLatAndLng} content='Click To Confirm'/> : <Button color="green" onClick={this.addCourt} content='Submit' secondary />}
+              {!this.state.submitReady ? <Button color="red" onClick={this.getLatAndLng} content='Click To Confirm Address'/> : <Button color="green" onClick={this.addCourt} content='Click To Submit Court' secondary />}
             </div>
+            {this.state.showConfirmMsg && <div style={style.message}>
+              <Message positive>
+                <Message.Header>Your court was successfully added</Message.Header>
+                <p>Click the orange Find A Court Button above to view all nearby basketball courts</p>
+              </Message>
+            </div>}
           </Grid.Column>
         </Grid.Row>
       </Grid>
