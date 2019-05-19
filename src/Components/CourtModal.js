@@ -3,7 +3,6 @@ import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import db from '../fire'
 import './Map.css'
-import { async } from 'q';
 
 const API_KEY = `${process.env.REACT_APP_DARK_SKY_API_KEY}`
 
@@ -74,7 +73,7 @@ class CourtModal extends React.Component {
   render() {
     return (
       <div>
-      <Modal trigger={<Icon onClick={this.getWeather} inverted name="basketball ball" size="large" color="orange"/>}>
+      <Modal trigger={<Icon onClick={this.getWeather} inverted name="basketball ball" size="large" color={this.props.gameDateTime ? "orange" : "black"}/>}>
         <Modal.Content image>
         <Image wrapped size='medium' src={this.props.image} />
         <Modal.Description>
