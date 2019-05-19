@@ -1,4 +1,4 @@
-# [Pick-up](https://pickup.netlify.com)
+# [Pick-up](https://pick-up-1.firebaseapp.com)
 
 App designed to find nearby basketball courts for pick-up games. Starting off as an Austin-based project with plans for expansion to other areas as development continues.
 
