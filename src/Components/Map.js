@@ -20,8 +20,8 @@ class Map extends Component {
 
   state = {
     center: {
-      lat: "",
-      lng: ""
+      lat: 0,
+      lng: 0
     },
     showCourts: false,
     Courts: []
@@ -32,8 +32,8 @@ class Map extends Component {
     window.navigator.geolocation.getCurrentPosition(success =>
       this.setState({
         center: {
-          lat: success.coords.latitude,
-          lng: success.coords.longitude
+          lat: Number(success.coords.latitude),
+          lng: Number(success.coords.longitude)
         }
       })
     );
@@ -125,7 +125,8 @@ class Map extends Component {
                 <Header>Nearby Courts</Header>
                 <h3>**Location must be enabled to see map. Otherwise, you'll just see floating basketballs in a sea of gray.**</h3>
                 <p>To find nearby courts, close this box and move the map around.</p>
-                <p>Look for the <Icon inverted name="basketball ball" size="large" color="orange"/> and click/tap to open information</p>
+                <p>Look for an orange <Icon inverted name="basketball ball" size="large" color="orange"/> icon to find scheduled games</p>
+                <p>Look for a black <Icon inverted name="basketball ball" size="large" color="black"/> icon to find a court without a scheduled game</p>
             </Modal.Description>
             </Modal.Content>
           </Modal>
