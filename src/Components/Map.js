@@ -20,8 +20,8 @@ class Map extends Component {
 
   state = {
     center: {
-      lat: 0,
-      lng: 0
+      lat: null,
+      lng: null
     },
     showCourts: false,
     Courts: []
