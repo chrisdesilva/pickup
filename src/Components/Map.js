@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import GoogleMapReact from "google-map-react"
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
 import { Button, Grid, Icon } from "semantic-ui-react"
 import { Link } from 'react-router-dom'
 import db from '../fire'
