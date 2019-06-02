@@ -1,11 +1,12 @@
 import React from 'react'
+import moment from 'moment'
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
-import { firebase, googleAuthProvider } from '../fire'
-import db from '../fire'
+import db, { firebase, googleAuthProvider } from '../fire'
 import './Map.css'
 
 const API_KEY = `${process.env.REACT_APP_DARK_SKY_API_KEY}`
+const now = moment().format('MMMM Do YYYY, h:mm a')
 
 const style = {
   weather: {
@@ -27,6 +28,7 @@ class CourtModal extends React.Component {
     conditions: '',
     error: null,
     loggedIn: null,
+    dateTime: null,
     dates: []
   }
 
@@ -36,13 +38,15 @@ class CourtModal extends React.Component {
     }
   }
 
+  // send newly scheduled game to database, update dates state array to immediately show newest game
   handleScheduleGame = e => {
     e.preventDefault()
     db.collection('courts').doc(this.props.id).update({
       dateTime: firebase.firestore.FieldValue.arrayUnion(this.state.dateTime)
     })
     this.setState({
-      dateTime: ''
+      dateTime: '',
+      dates: [...this.state.dates, this.state.dateTime ]
     })
   }
 
@@ -60,26 +64,27 @@ class CourtModal extends React.Component {
     })
   }
 
+
   startLogin = () => {
     firebase.auth().signInWithPopup(googleAuthProvider)
   }
 
   //trigged onClick with icon, pulls in current temprature and conditions
   getWeather = () => {
-     fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            showWeather: true,
-            temp: Math.floor(result.currently.temperature),
-            conditions: result.currently.summary
-          })
-        },
-        (error) => {
-          this.setState({ showWeather: false })
-        }
-      )
+    //  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       this.setState({
+    //         showWeather: true,
+    //         temp: Math.floor(result.currently.temperature),
+    //         conditions: result.currently.summary
+    //       })
+    //     },
+    //     (error) => {
+    //       this.setState({ showWeather: false })
+    //     }
+    //   )
   }
 
   render() {
