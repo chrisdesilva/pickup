@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react"
+import { Button, Grid, Icon } from "semantic-ui-react"
 import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
@@ -34,7 +34,8 @@ class Map extends Component {
         center: {
           lat: Number(success.coords.latitude),
           lng: Number(success.coords.longitude)
-        }
+        },
+        showCourts: true
       })
     );
     // pull data from database to have courts ready for display when component is ready
@@ -94,7 +95,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div style={{ height: "80vh", width: "100vw" }}>
+      <div style={{ height: "70vh", width: "100vw" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY }}
           center={this.state.center}
@@ -118,22 +119,30 @@ class Map extends Component {
           )}
           <MyLocation lat={this.state.center.lat} lng={this.state.center.lng} />
         </GoogleMapReact>
-        <div id="modalContainer">
-          <Modal trigger={<Button color="orange" onClick={this.findCourts}>Show Nearby Courts</Button>} closeIcon>
-            <Modal.Content>
-            <Modal.Description>
-                <Header>Nearby Courts</Header>
-                <h3>**Location must be enabled to see map. Otherwise, you'll just see floating basketballs in a sea of gray.**</h3>
-                <p>To find nearby courts, close this box and move the map around.</p>
+        <Grid id="mapInfo">
+            <Grid.Row >
+              <Grid.Column>
+              <h3>**Location must be enabled to see map. Otherwise, you'll just see floating basketballs in a sea of gray.**</h3>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
                 <p>Look for an orange <Icon inverted name="basketball ball" size="large" color="orange"/> icon to find scheduled games</p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
                 <p>Look for a black <Icon inverted name="basketball ball" size="large" color="black"/> icon to find a court without a scheduled game</p>
-            </Modal.Description>
-            </Modal.Content>
-          </Modal>
-          <Link to="/">
-              <Button secondary>Home Page</Button>
-          </Link>
-        </div>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <Link to="/">
+                  <Button secondary>Home Page</Button>
+                </Link>
+              </Grid.Column>
+            </Grid.Row>
+        </Grid>
       </div>
     );
   }

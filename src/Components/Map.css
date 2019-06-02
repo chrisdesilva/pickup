@@ -1,9 +1,4 @@
-#modalContainer {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-#mapsLink {
-  color: orangered
+#mapInfo {
+  text-align: center;
+  margin: 0 2rem;
 }
