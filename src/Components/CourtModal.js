@@ -25,7 +25,6 @@ class CourtModal extends React.Component {
     showWeather: false,
     temp: '',
     conditions: '',
-    dateTime: '',
     error: null,
     loggedIn: null
   }
@@ -39,17 +38,14 @@ class CourtModal extends React.Component {
   handleScheduleGame = e => {
     e.preventDefault()
     db.collection('courts').doc(this.props.id).update({
-      dateTime: this.state.dateTime
+      dateTime: firebase.firestore.FieldValue.arrayUnion(this.state.dateTime)
     })
     this.setState({
       dateTime: ''
     })
   }
 
-  handleRemoveScheduledGame = () => {
-    console.log(this.props.id)
-  }
-
+  // if user is logged in, update state which will allow user to add games to schedule 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -65,7 +61,7 @@ class CourtModal extends React.Component {
     firebase.auth().signInWithPopup(googleAuthProvider)
   }
 
-  
+  //trigged onClick with icon, pulls in current temprature and conditions
   getWeather = () => {
      fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
       .then(res => res.json())
@@ -115,12 +111,11 @@ class CourtModal extends React.Component {
                 <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
               </Modal>}
               <p>
-                Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
-                {this.props.gameDateTime && 
-                  <Button onClick={this.handleRemoveScheduledGame} size="mini" secondary icon>
-                    <Icon name="delete" color="red"/>
-                  </Button>
-                }
+                Upcoming games: {this.props.gameDateTime ? this.props.gameDateTime.map(game => {
+                  return <li>
+                          {game}
+                         </li>
+                }) : "None scheduled"} 
               </p>
             </Form>
           </Modal.Actions> 
