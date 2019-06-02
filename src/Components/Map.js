@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import { Button, Grid, Icon } from "semantic-ui-react"
 import { Link } from 'react-router-dom'
-import db from '../fire'
+import db, { firebase } from '../fire'
 import './Map.css';
 import FindACourt from "./FindACourt"
 
@@ -24,6 +24,7 @@ class Map extends Component {
       lng: null
     },
     showCourts: false,
+    loggedIn: null,
     Courts: []
   };
 
@@ -60,7 +61,6 @@ class Map extends Component {
       .catch(function(error) {
         console.log(error)
       })
-
   }
 
   componentDidUpdate() {
@@ -85,12 +85,6 @@ class Map extends Component {
       .catch(function(error) {
         console.log(error)
       })
-  }
-
-  findCourts = () => {
-    this.setState({
-      showCourts: true
-    })
   }
 
   render() {

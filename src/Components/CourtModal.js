@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
+import { firebase } from '../fire'
 import db from '../fire'
 import './Map.css'
 
@@ -25,7 +26,8 @@ class CourtModal extends React.Component {
     temp: '',
     conditions: '',
     dateTime: '',
-    error: null
+    error: null,
+    loggedIn: null
   }
 
   handleChange = (event, {name, value}) => {
@@ -46,6 +48,17 @@ class CourtModal extends React.Component {
 
   handleRemoveScheduledGame = () => {
     console.log(this.props.id)
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          loggedIn: true
+        })
+        console.log(user.displayName)
+      }
+    })
   }
 
   
@@ -79,23 +92,37 @@ class CourtModal extends React.Component {
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-        <p style={style.p}>Schedule a game</p>
-          <Form onSubmit={this.handleScheduleGame}>
-            <DateTimeInput
-              clearable
-              clearIcon={<Icon name="remove" color="red" />}
-              dateTimeFormat={'MMMM Do YYYY, h:mm a'}
-              popupPosition={'bottom center'}
-              name="dateTime"
-              placeholder="Select a date and time"
-              value={this.state.dateTime}
-              iconPosition="left"
-              onChange={this.handleChange}
-            />
-            {this.state.dateTime && <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} basic size="small">
-              <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
-            </Modal>}
+        {this.state.loggedIn && 
+          <Modal.Actions>
+            <p style={style.p}>Schedule a game</p>
+            <Form onSubmit={this.handleScheduleGame}>
+              <DateTimeInput
+                clearable
+                clearIcon={<Icon name="remove" color="red" />}
+                dateTimeFormat={'MMMM Do YYYY, h:mm a'}
+                popupPosition={'bottom center'}
+                name="dateTime"
+                placeholder="Select a date and time"
+                value={this.state.dateTime}
+                iconPosition="left"
+                onChange={this.handleChange}
+              />
+              {this.state.dateTime && <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} basic size="small">
+                <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
+              </Modal>}
+              <p>
+                Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
+                {this.props.gameDateTime && 
+                  <Button onClick={this.handleRemoveScheduledGame} size="mini" secondary icon>
+                    <Icon name="delete" color="red"/>
+                  </Button>
+                }
+              </p>
+            </Form>
+          </Modal.Actions> 
+        }
+        {!this.state.loggedIn &&
+          <Modal.Actions>
             <p>
               Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
               {this.props.gameDateTime && 
@@ -104,8 +131,8 @@ class CourtModal extends React.Component {
                 </Button>
               }
             </p>
-          </Form>
-        </Modal.Actions>
+        </Modal.Actions> 
+        }
        </Modal>
     </div>
     )
