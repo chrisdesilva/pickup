@@ -52,6 +52,8 @@ class CourtModal extends React.Component {
 
   // if user is logged in, update state which will allow user to add games to schedule 
   componentDidMount() {
+    const dates = this.props.gameDateTime
+    
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -71,20 +73,20 @@ class CourtModal extends React.Component {
 
   //trigged onClick with icon, pulls in current temprature and conditions
   getWeather = () => {
-    //  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       this.setState({
-    //         showWeather: true,
-    //         temp: Math.floor(result.currently.temperature),
-    //         conditions: result.currently.summary
-    //       })
-    //     },
-    //     (error) => {
-    //       this.setState({ showWeather: false })
-    //     }
-    //   )
+     fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            showWeather: true,
+            temp: Math.floor(result.currently.temperature),
+            conditions: result.currently.summary
+          })
+        },
+        (error) => {
+          this.setState({ showWeather: false })
+        }
+      )
   }
 
   render() {
