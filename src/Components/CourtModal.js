@@ -26,7 +26,8 @@ class CourtModal extends React.Component {
     temp: '',
     conditions: '',
     error: null,
-    loggedIn: null
+    loggedIn: null,
+    dates: []
   }
 
   handleChange = (event, {name, value}) => {
@@ -52,8 +53,10 @@ class CourtModal extends React.Component {
         this.setState({
           loggedIn: true
         })
-        console.log(user.displayName)
       }
+    })
+    this.setState({
+      dates: this.props.gameDateTime
     })
   }
 
@@ -111,11 +114,11 @@ class CourtModal extends React.Component {
                 <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
               </Modal>}
               <p>
-                Upcoming games: {this.props.gameDateTime ? this.props.gameDateTime.map(game => {
-                  return <li>
+                Scheduled games: {this.state.dates ? this.state.dates.map(game => {
+                  return <li key={game}>
                           {game}
-                         </li>
-                }) : "None scheduled"} 
+                         </li> 
+                }) : "None"} 
               </p>
             </Form>
           </Modal.Actions> 
