@@ -131,7 +131,7 @@ class CourtModal extends React.Component {
               Sign In to Schedule Game
             </Button>
             <p>
-              Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
+              Next game: {this.state.dates ? this.state.dates : "None scheduled"} 
             </p>
         </Modal.Actions> 
         }
