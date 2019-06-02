@@ -1,12 +1,11 @@
 import React from 'react'
-import moment from 'moment'
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
-import db, { firebase, googleAuthProvider } from '../fire'
+import { firebase, googleAuthProvider } from '../fire'
+import db from '../fire'
 import './Map.css'
 
 const API_KEY = `${process.env.REACT_APP_DARK_SKY_API_KEY}`
-const now = moment().format('MMMM Do YYYY, h:mm a')
 
 const style = {
   weather: {
@@ -38,7 +37,6 @@ class CourtModal extends React.Component {
     }
   }
 
-  // send newly scheduled game to database, update dates state array to immediately show newest game
   handleScheduleGame = e => {
     e.preventDefault()
     db.collection('courts').doc(this.props.id).update({
@@ -46,14 +44,12 @@ class CourtModal extends React.Component {
     })
     this.setState({
       dateTime: '',
-      dates: [...this.state.dates, this.state.dateTime ]
+      dates: [...this.state.dates, this.state.dateTime]
     })
   }
 
   // if user is logged in, update state which will allow user to add games to schedule 
   componentDidMount() {
-    const dates = this.props.gameDateTime
-    
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -65,7 +61,6 @@ class CourtModal extends React.Component {
       dates: this.props.gameDateTime
     })
   }
-
 
   startLogin = () => {
     firebase.auth().signInWithPopup(googleAuthProvider)

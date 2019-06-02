@@ -270,3 +270,199 @@
     at IncomingMessage.emit (events.js:202:15)
 [error] 
 [error] Error: An unexpected error has occurred.
+[debug] [2019-06-02T21:24:26.527Z] ----------------------------------------------------------------------
+[debug] [2019-06-02T21:24:26.529Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Chris\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-06-02T21:24:26.529Z] CLI Version:   6.10.0
+[debug] [2019-06-02T21:24:26.529Z] Platform:      win32
+[debug] [2019-06-02T21:24:26.529Z] Node Version:  v11.9.0
+[debug] [2019-06-02T21:24:26.530Z] Time:          Sun Jun 02 2019 16:24:26 GMT-0500 (Central Daylight Time)
+[debug] [2019-06-02T21:24:26.530Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-02T21:24:26.537Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-02T21:24:26.537Z] > authorizing via signed-in user
+[debug] [2019-06-02T21:24:26.537Z] [iam] checking project pick-up-1 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-06-02T21:24:26.539Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pick-up-1:testIamPermissions  
+
+[debug] [2019-06-02T21:24:26.798Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-02T21:24:26.800Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/pick-up-1  
+ 
+[debug] [2019-06-02T21:24:27.106Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'pick-up-1'...
+[info] 
+[info] i  deploying firestore, hosting
+[info] i  firestore: checking firestore.rules for compilation errors...
+[info] i  firestore: reading indexes from firestore.indexes.json...
+[debug] [2019-06-02T21:24:27.112Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/pick-up-1:test  
+
+[debug] [2019-06-02T21:24:33.029Z] <<< HTTP RESPONSE 200
+[info] +  firestore: rules file firestore.rules compiled successfully
+[debug] [2019-06-02T21:24:33.032Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/pick-up-1/versions  
+
+[debug] [2019-06-02T21:24:33.774Z] <<< HTTP RESPONSE 200
+[info] i  firestore: uploading rules firestore.rules...
+[debug] [2019-06-02T21:24:33.777Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/pick-up-1/rulesets  
+
+[debug] [2019-06-02T21:24:33.777Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/pick-up-1/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2019-06-02T21:24:34.137Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-02T21:24:34.138Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/pick-up-1/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2019-06-02T21:24:34.422Z] <<< HTTP RESPONSE 200
+[info] +  firestore: deployed indexes in firestore.indexes.json successfully
+[debug] [2019-06-02T21:24:40.701Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-02T21:24:40.702Z] [rules] created ruleset projects/pick-up-1/rulesets/6365edc8-146b-45da-8bc0-0aec70d4f1e7
+[info] i  hosting[pick-up-1]: beginning deploy...
+[info] i  hosting[pick-up-1]: found 18 files in build
+[debug] [2019-06-02T21:24:40.714Z] [hosting] hash cache [YnVpbGQ] load error: lines is not defined
+[debug] [2019-06-02T21:24:41.467Z] [hosting] hash cache [YnVpbGQ] stored for 18 files
+[debug] [2019-06-02T21:24:41.467Z] [hosting][hash queue][FINAL]
+[debug] [2019-06-02T21:24:41.467Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/pick-up-1/versions/36099c538b186f60:populateFiles  
+ <request body omitted>
+[debug] [2019-06-02T21:24:41.783Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-02T21:24:41.788Z] [hosting][populate queue][FINAL]
+[debug] [2019-06-02T21:24:41.788Z] [hosting] uploads queued: 8
+[debug] [2019-06-02T21:25:02.078Z] [hosting][upload] static/js/main.ce7e4937.chunk.js (e005409034ea479f122dc3c0c191e9e63daa37ae1ba49a788e39f43c7795cc9e) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2UqVWNDhidnqkyzprzEKHb95Sz6FGa4n4y3Ju8WypO9pZCqxt_5zECv-QaJTSeeOIn0hu8t0PxiYu9X7YUcBK2wnv0_0wvumLHgMmVTYXoDnjNAjJGA',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:02 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:02.110Z] [hosting][upload] static/js/2.8cd0795a.chunk.js.map (d3aebff1c4dd32b6c2e13b4d3bff8a8a9cc2971299020faebe3c36756ebef5a7) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2UpUQlyjGoZizZIjV1AuGbgFEUnPm4gd4joOhv65enazbTACqxiXr4Ei3WlRF5R0dREic9g5NaZwXZN2p2LKvDi7QckxztyQT2LrNiQvjfPcBN4OFpM',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:02 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:02.128Z] [hosting][upload] static/js/2.8cd0795a.chunk.js (1c4b26aba7c3ba31c8497e35d63b6f1a43d3586fee1e12a84b08a1b49f4c5359) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2Uqj-WIXHfzVRv8YyFsqDJl0BQvJljES6f1a1d1Teo9jqkaAgxm2SFoeUIdHY4pnETs-7dXnnD-UL2J9eDifHAnPFCtIUoSsXqfGpNf5YRFVh-vC7JM',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:02 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:02.150Z] [hosting][upload] service-worker.js (b8e2437abf516db4312f69cf84e5925779712a636538065648693966a1e665ed) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2UrT3hy5amhIn0_fmSyzz1I897q2jRDAQIach2ZMNLXBmMVOQJjIb5KGSN0-FKf2S7Hp4-8giXFiorDCXbKyPRx4LUWfGECstxKZsBF2vB8jvauOBtE',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:02 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:02.481Z] [uploadQueue] Retrying task e005409034ea479f122dc3c0c191e9e63daa37ae1ba49a788e39f43c7795cc9e
+[debug] [2019-06-02T21:25:02.510Z] [uploadQueue] Retrying task d3aebff1c4dd32b6c2e13b4d3bff8a8a9cc2971299020faebe3c36756ebef5a7
+[debug] [2019-06-02T21:25:02.528Z] [uploadQueue] Retrying task 1c4b26aba7c3ba31c8497e35d63b6f1a43d3586fee1e12a84b08a1b49f4c5359
+[debug] [2019-06-02T21:25:02.551Z] [uploadQueue] Retrying task b8e2437abf516db4312f69cf84e5925779712a636538065648693966a1e665ed
+[debug] [2019-06-02T21:25:02.679Z] [hosting][upload] precache-manifest.c18db6e7f604590dc6dca179abffbf60.js (f28f1c194c2831d22187895afacd8434620e0a8ced22137a599329c6cd77a319) HTTP ERROR 503 : { 'x-guploader-uploadid':
+   'AEnB2Uoe0gr00zInH1DKbyWZqcZFIomYnVsE4bgEx2vL4GW-czr_x9QFaDrNilZJ54JDBKCz0Twih72ALvkggqF0vRx6DWmXgQ',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:03 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:03.080Z] [uploadQueue] Retrying task f28f1c194c2831d22187895afacd8434620e0a8ced22137a599329c6cd77a319
+[debug] [2019-06-02T21:25:22.889Z] [hosting][upload] service-worker.js (b8e2437abf516db4312f69cf84e5925779712a636538065648693966a1e665ed) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2Uo9LJD-8ETHppXofaf2ykm0J8Ni3w5erSzF8PYMi5ngfxY622arvNQdQaPOCHumjIiVDvw_nmerVMXFN-RpYPDjDcVQIy3CsU4wtQWtzHgDrMhht6s',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:23 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:23.349Z] [hosting][upload] static/js/2.8cd0795a.chunk.js (1c4b26aba7c3ba31c8497e35d63b6f1a43d3586fee1e12a84b08a1b49f4c5359) HTTP ERROR 500 : { 'x-guploader-uploadid':
+   'AEnB2UoPbou_a-xiaTyWMsar3iYHDQlcwoeEOe_50WUvEnnHOHU4rEJCGmExWZJlyUxiqc_S7N-CzqamL7vpCss5CGXMJ1TxzlIOKDT7ahgQpgnWjXnOd14',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:24 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:23.609Z] [hosting][upload] precache-manifest.c18db6e7f604590dc6dca179abffbf60.js (f28f1c194c2831d22187895afacd8434620e0a8ced22137a599329c6cd77a319) HTTP ERROR 503 : { 'x-guploader-uploadid':
+   'AEnB2Urv2aXohjCdPRkauQ7_5tUwqn3VNUg42WN3BSvVX80PnQbI8IZJP1CFS3JjxnjW9y5HnUOMUWcaMvFqa87CPyuvZammPOK0gV44-nHkSB_Wpy6p52U',
+  'content-length': '0',
+  date: 'Sun, 02 Jun 2019 21:25:24 GMT',
+  server: 'UploadServer',
+  'content-type': 'text/html; charset=UTF-8',
+  'alt-svc': 'quic=":443"; ma=2592000; v="46,44,43,39"',
+  connection: 'close' } 
+[debug] [2019-06-02T21:25:23.689Z] [uploadQueue] Retrying task b8e2437abf516db4312f69cf84e5925779712a636538065648693966a1e665ed
+[debug] [2019-06-02T21:25:24.150Z] [uploadQueue] Retrying task 1c4b26aba7c3ba31c8497e35d63b6f1a43d3586fee1e12a84b08a1b49f4c5359
+[debug] [2019-06-02T21:25:24.409Z] [uploadQueue] Retrying task f28f1c194c2831d22187895afacd8434620e0a8ced22137a599329c6cd77a319
+[debug] [2019-06-02T21:25:38.287Z] [hosting][upload queue][FINAL]
+[info] +  hosting[pick-up-1]: file upload complete
+[debug] [2019-06-02T21:25:38.288Z] [hosting] deploy completed after 57586ms
+[debug] [2019-06-02T21:25:38.467Z] [rules] releasing cloud.firestore with ruleset projects/pick-up-1/rulesets/6365edc8-146b-45da-8bc0-0aec70d4f1e7
+[debug] [2019-06-02T21:25:38.468Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/pick-up-1/releases/cloud.firestore  
+
+[debug] [2019-06-02T21:26:05.925Z] <<< HTTP RESPONSE 502
+[debug] [2019-06-02T21:26:05.925Z] <<< HTTP RESPONSE BODY <!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 502 (Server Error)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  </style>
+  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+  <p><b>502.</b> <ins>That’s an error.</ins>
+  <p>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.  <ins>That’s all we know.</ins>
+
+[debug] [2019-06-02T21:26:05.926Z] [rules] ruleset update failed, attempting to create instead
+[debug] [2019-06-02T21:26:05.926Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/pick-up-1/releases  
+
+[debug] [2019-06-02T21:26:33.724Z] <<< HTTP RESPONSE 502
+[debug] [2019-06-02T21:26:33.725Z] <<< HTTP RESPONSE BODY <!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 502 (Server Error)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  </style>
+  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+  <p><b>502.</b> <ins>That’s an error.</ins>
+  <p>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.  <ins>That’s all we know.</ins>
+
+[error] 
+[error] Error: HTTP Error: 502, Unknown Error
+[debug] [2019-06-02T21:26:33.823Z] Error Context: {
+  "body": {
+    "error": {
+      "message": "Unknown Error"
+    }
+  },
+  "response": {
+    "statusCode": 502,
+    "body": "<!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n  <title>Error 502 (Server Error)!!1</title>\n  <style>\n    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}\n  </style>\n  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>\n  <p><b>502.</b> <ins>That’s an error.</ins>\n  <p>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.  <ins>That’s all we know.</ins>\n",
+    "headers": {
+      "content-type": "text/html; charset=UTF-8",
+      "referrer-policy": "no-referrer",
+      "content-length": "1613",
+      "date": "Sun, 02 Jun 2019 21:26:34 GMT",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,44,43,39\""
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "firebaserules.googleapis.com",
+        "port": 443,
+        "hostname": "firebaserules.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1/projects/pick-up-1/releases",
+        "path": "/v1/projects/pick-up-1/releases",
+        "href": "https://firebaserules.googleapis.com/v1/projects/pick-up-1/releases"
+      },
+      "method": "POST"
+    }
+  }
+}
