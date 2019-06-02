@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
-import { firebase } from '../fire'
+import { firebase, googleAuthProvider } from '../fire'
 import db from '../fire'
 import './Map.css'
 
@@ -59,6 +59,10 @@ class CourtModal extends React.Component {
         console.log(user.displayName)
       }
     })
+  }
+
+  startLogin = () => {
+    firebase.auth().signInWithPopup(googleAuthProvider)
   }
 
   
@@ -122,14 +126,12 @@ class CourtModal extends React.Component {
           </Modal.Actions> 
         }
         {!this.state.loggedIn &&
-          <Modal.Actions>
+          <Modal.Actions id="signInActions">
+            <Button secondary onClick={this.startLogin}>
+              Sign In to Schedule Game
+            </Button>
             <p>
               Next game: {this.props.gameDateTime ? this.props.gameDateTime : "None scheduled"} 
-              {this.props.gameDateTime && 
-                <Button onClick={this.handleRemoveScheduledGame} size="mini" secondary icon>
-                  <Icon name="delete" color="red"/>
-                </Button>
-              }
             </p>
         </Modal.Actions> 
         }

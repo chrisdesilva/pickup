@@ -2,3 +2,13 @@
   text-align: center;
   margin: 0 2rem;
 }
+
+#mapsLink {
+  color: red;
+}
+
+#signInActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

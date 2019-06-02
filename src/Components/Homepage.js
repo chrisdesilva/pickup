@@ -39,7 +39,7 @@ const Homepage = () => {
             <Link to="/courts">
               <Button id="btn-find" color="orange">Find A Court</Button>
             </Link>
-            {login ? <Button onClick={startLogout}>Log Out</Button> : <Button onClick={startLogin}>Log In With Google To Add Court</Button>}
+            {login ? <Button onClick={startLogout}>Log Out</Button> : <Button onClick={startLogin}>Sign In To Add Court</Button>}
           </Button.Group>
         </Grid.Column>
       </Grid.Row>
