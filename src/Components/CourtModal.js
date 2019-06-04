@@ -115,7 +115,7 @@ class CourtModal extends React.Component {
               {this.state.dateTime && <Modal trigger={<Button secondary type="submit">Schedule Game</Button>} basic size="small">
                 <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
               </Modal>}
-              <p>
+              <p id="schedule">
                 Scheduled games: {this.state.dates ? this.state.dates.map(game => {
                   return <li key={game}>
                           {game}
@@ -130,7 +130,7 @@ class CourtModal extends React.Component {
             <Button secondary onClick={this.startLogin}>
               Sign In to Schedule Game
             </Button>
-            <p>
+            <p id="schedule">
             Scheduled games: {this.state.dates ? this.state.dates.map(game => {
               return <li key={game}>
                       {game}
