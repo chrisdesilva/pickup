@@ -50,7 +50,7 @@ class CourtModal extends React.Component {
     })
   }
 
-  // take in game from onclick method
+  // take in game from onclick method, filter out game to be deleted, update state
   handleRemoveGame = game => {
     const games = this.state.dates.filter( deleted => deleted !== game )
     db.collection('courts').doc(this.props.id).update({
@@ -79,20 +79,20 @@ class CourtModal extends React.Component {
 
   //trigged onClick with icon, pulls in current temprature and conditions
   getWeather = () => {
-    //  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       this.setState({
-    //         showWeather: true,
-    //         temp: Math.floor(result.currently.temperature),
-    //         conditions: result.currently.summary
-    //       })
-    //     },
-    //     (error) => {
-    //       this.setState({ showWeather: false })
-    //     }
-    //   )
+     fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            showWeather: true,
+            temp: Math.floor(result.currently.temperature),
+            conditions: result.currently.summary
+          })
+        },
+        (error) => {
+          this.setState({ showWeather: false })
+        }
+      )
   }
 
   render() {
