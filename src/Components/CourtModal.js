@@ -28,7 +28,8 @@ class CourtModal extends React.Component {
     error: null,
     loggedIn: null,
     dateTime: null,
-    dates: []
+    dates: [],
+    deleteDate: null
   }
 
   handleChange = (event, {name, value}) => {
@@ -37,6 +38,7 @@ class CourtModal extends React.Component {
     }
   }
 
+  // get document from firestore by id via props, add new game to array, update state to immediately display new game
   handleScheduleGame = e => {
     e.preventDefault()
     db.collection('courts').doc(this.props.id).update({
@@ -46,6 +48,15 @@ class CourtModal extends React.Component {
       dateTime: '',
       dates: [...this.state.dates, this.state.dateTime]
     })
+  }
+
+  // take in game from onclick method
+  handleRemoveGame = game => {
+    const games = this.state.dates.filter( deleted => deleted !== game )
+    db.collection('courts').doc(this.props.id).update({
+      dateTime: firebase.firestore.FieldValue.arrayRemove(game)
+    })
+    this.setState({ dates: games })
   }
 
   // if user is logged in, update state which will allow user to add games to schedule 
@@ -68,26 +79,26 @@ class CourtModal extends React.Component {
 
   //trigged onClick with icon, pulls in current temprature and conditions
   getWeather = () => {
-     fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            showWeather: true,
-            temp: Math.floor(result.currently.temperature),
-            conditions: result.currently.summary
-          })
-        },
-        (error) => {
-          this.setState({ showWeather: false })
-        }
-      )
+    //  fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${this.props.lat},${this.props.lng}`)
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       this.setState({
+    //         showWeather: true,
+    //         temp: Math.floor(result.currently.temperature),
+    //         conditions: result.currently.summary
+    //       })
+    //     },
+    //     (error) => {
+    //       this.setState({ showWeather: false })
+    //     }
+    //   )
   }
 
   render() {
     return (
       <div>
-      <Modal trigger={<Icon onClick={this.getWeather} inverted name="basketball ball" size="large" color={this.props.gameDateTime ? "orange" : "black"}/>}>
+      <Modal trigger={<Icon onClick={this.getWeather} inverted name="basketball ball" size="large" color={this.props.gameDateTime && this.props.gameDateTime.length > 0 ? "orange" : "black"}/>}>
         <Modal.Content image>
         <Image wrapped size='medium' src={this.props.image} />
         <Modal.Description>
@@ -116,9 +127,9 @@ class CourtModal extends React.Component {
                 <Modal.Description><p style={{textAlign: 'center'}}>Successfully added</p></Modal.Description>
               </Modal>}
               <p id="schedule">
-                Scheduled games: {this.state.dates ? this.state.dates.map(game => {
+                Scheduled games: {this.state.dates && this.state.dates.length > 0 ? this.state.dates.map( game => {
                   return <li key={game}>
-                          {game}
+                          <Icon id="deleteGame" name="trash alternate outline" color="red" onClick={() => { this.handleRemoveGame(game) }} /> {game}
                          </li> 
                 }) : "None"} 
               </p>
@@ -131,7 +142,7 @@ class CourtModal extends React.Component {
               Sign In to Schedule Game
             </Button>
             <p id="schedule">
-            Scheduled games: {this.state.dates ? this.state.dates.map(game => {
+            Scheduled games: {this.state.dates && this.state.dates.length > 0 ? this.state.dates.map(game => {
               return <li key={game}>
                       {game}
                      </li> 
