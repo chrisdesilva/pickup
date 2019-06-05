@@ -26,7 +26,7 @@ const About = () => {
       <Grid stackable>
         <Grid.Row verticalAlign="middle" centered style={style} columns={2}>
           <Grid.Column>
-          <p style={style.p}>Pick-Up is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. Users can find basketball courts, schedule pickup games, and even check weather conditions to ensure the court will be dry for gametime. We make it easy to find the place so you can get out and play.</p>
+          <p style={style.p}>Shoot For Teams is designed to take the hassle out of finding nearby basketball courts for pickup games. With user-generated information about courts, you get a much more detailed experience than traditional search sites. Users can find basketball courts, schedule games, and even check weather conditions to ensure the court will be dry for gametime. We make it easy to find the court so you can get out and play.</p>
           </Grid.Column>
           <Grid.Column>
             <Image rounded src={basketball} alt="Man preparing to shoot a basketball" />
