@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Grid } from 'semantic-ui-react'
+import {Button, Grid, Icon} from 'semantic-ui-react'
 import About from './About'
 import Footer from './Footer'
 import './Homepage.css'
@@ -37,9 +37,28 @@ const Homepage = () => {
           <h2>We find the court. You bring the game.</h2>
           <Button.Group vertical>
             <Link to="/courts">
-              <Button id="btn-find" color="orange">Find A Court</Button>
+              <Button id="btn-find" color="orange" animated>
+                <Button.Content visible>Find A Court</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="arrow right" />
+                </Button.Content>
+              </Button>
             </Link>
-            {login ? <Button onClick={startLogout}>Log Out</Button> : <Button onClick={startLogin}>Sign In To Add Court</Button>}
+            {login ? (
+              <Button onClick={startLogout} animated>
+                <Button.Content visible>Log Out</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="arrow right"/>
+                </Button.Content>
+              </Button>
+            ) : (
+              <Button onClick={startLogin} animated>
+                <Button.Content visible>Sign In To Add Court</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="arrow right"/>
+                </Button.Content>
+              </Button>
+            )}
           </Button.Group>
         </Grid.Column>
       </Grid.Row>

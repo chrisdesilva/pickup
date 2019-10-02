@@ -132,7 +132,12 @@ class Map extends Component {
             <Grid.Row>
               <Grid.Column>
                 <Link to="/">
-                  <Button secondary>Home Page</Button>
+                  <Button secondary animated>
+                    <Button.Content visible>Home Page</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="arrow right" />
+                    </Button.Content>
+                  </Button>
                 </Link>
               </Grid.Column>
             </Grid.Row>
