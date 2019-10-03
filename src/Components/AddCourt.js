@@ -81,6 +81,7 @@ class AddCourt extends React.Component {
     })
     .then(function(docRef) {
       console.log("ID: ", docRef.id)
+      document.location.href = '/courts';
     })
     .catch(function(error) {
       console.error("Error: ", error)
