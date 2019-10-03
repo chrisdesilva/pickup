@@ -78,7 +78,7 @@ class AddCourt extends React.Component {
     const image = this.fileInput.current.files[0];
     //Check if user tricked us so if he/she tried to trick us then exit the function
     if(image == undefined){
-      alert("You have to select and image");
+      alert("You have to select an image");
       return true;
     }
     //Restrict the files, only image files
