@@ -2,27 +2,20 @@
 
 App designed to find nearby basketball courts for pick-up games. Starting off as an Austin-based project with plans for expansion to other areas as development continues.
 
+# Description
+
+Pick-up is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. We make it easy to find the place so you can get out and play.
+
+# Install
+
+When accessing the [page](https://pick-up-1.firebaseapp.com) with your Android smartphone, you may select the "Add to Home Screen" button on the Chrome menu to access it as a regular app. For desktop Chrome you may go to Menu and then "Install Pick-up" to add it to your desktop. As for iOS support, it is still just starting out, but you may access the site, then go to the menu, then "Share", and "Add to Homescreen" and you will be good to go.
+
+# Usage
+
+Just click on the "Find a Court" button, enable location access, and see the courts nearby you. The orange ball represents courts with scheduled games, the black ones represents free courts. Clicking on the ball let you see photos, location, current weather and future games. You may signin or login to be able to submit new court entries and schedule matches.
+
+# [License](https://github.com/chrisdesilva/pickup/blob/master/LICENSE)
+
 # Contribute
 
-I'd love your help with this project. The steps below should get you going. If not, make a contribution by updating the docs!
-
-This project makes use of several api keys, each of which is stored in a .env file that isn't pushed to GitHub for security reasons. You can register for keys by using the following links. 
-[Dark Sky API](https://darksky.net/dev/register)
-[Google Places API](https://cloud.google.com/maps-platform/?_ga=2.33032574.1722274875.1559603342-1851123871.1552525580#get-started)
-
-You will also need to make use of [Firestore](https://firebase.google.com/docs/firestore/quickstart). Follow the directions for getting started with web to create your database for testing.
-
-1. Fork the project by clicking the Fork button up at the top of the screen.
-2. Clone your fork with `git clone [code-you-copied-from-clone-button]`
-3. `cd pickup` to make sure you are in the right directory
-4. Add an `upstream` remote for keeping your local repo up-to-date:
-  > `git remote add upstream https://github.com/chrisdesilva/pickup.git`
-5. Run `npm install` to install project dependencies.
-6. In the root directory, create a new file called `.env`
-7. Copy the variables from `.env.sample` into your .env file and update with your keys
-8. Run `npm start` to start your dev environment 
-9. Start contributing!
-
-When you're ready to add your changes to the project, submit a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
-
-If you've got any ideas for making the app better, submit an [issue](https://github.com/chrisdesilva/pickup/issues). Thanks for helping out! 
+I'd love to have your help with this project. The steps [here](https://github.com/chrisdesilva/pickup/blob/master/Contributing.md) should get you going. If not, make a contribution by updating the docs!
