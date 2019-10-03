@@ -1,10 +1,10 @@
 # [Pick-up](https://pick-up-1.firebaseapp.com)
 
-App designed to find nearby basketball courts for pick-up games. Starting off as an Austin-based project with plans for expansion to other areas as development continues.
+App designed to find nearby basketball courts for pick-up games. Starting off as an Austin-based project with plans for expansion to other areas as the development continues.
 
 # Contribute
 
-I'd love your help with this project. The steps below should get you going. If not, make a contribution by updating the docs!
+I'd love to have your help with this project. The steps below should get you going. If not, make a contribution by updating the docs!
 
 This project makes use of several api keys, each of which is stored in a .env file that isn't pushed to GitHub for security reasons. You can register for keys by using the following links. 
 [Dark Sky API](https://darksky.net/dev/register)
@@ -14,12 +14,12 @@ You will also need to make use of [Firestore](https://firebase.google.com/docs/f
 
 1. Fork the project by clicking the Fork button up at the top of the screen.
 2. Clone your fork with `git clone [code-you-copied-from-clone-button]`
-3. `cd pickup` to make sure you are in the right directory
+3. Do `cd pickup` to make sure you are in the right directory.
 4. Add an `upstream` remote for keeping your local repo up-to-date:
   > `git remote add upstream https://github.com/chrisdesilva/pickup.git`
 5. Run `npm install` to install project dependencies.
 6. In the root directory, create a new file called `.env`
-7. Copy the variables from `.env.sample` into your .env file and update with your keys
+7. Copy the variables from `.env.sample` into your .env file and update with your keys.
 8. Run `npm start` to start your dev environment 
 9. Start contributing!
 
