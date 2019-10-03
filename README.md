@@ -1,14 +1,14 @@
-# [Pick-up](https://pick-up-1.firebaseapp.com)
+# [Shoot For Teams](shootforteams.com)
 
-App designed to find nearby basketball courts for pick-up games. Starting off as an Austin-based project with plans for expansion to other areas as development continues.
+App designed to find nearby basketball courts for Shoot For Teams games. Starting off as an Austin-based project with plans for expansion to other areas as development continues.
 
 # Description
 
-Pick-up is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. We make it easy to find the place so you can get out and play.
+Shoot For Teams is designed to take the hassle out of finding nearby basketball courts. With user-generated information about courts, you get a much more detailed experience than traditional search sites. We make it easy to find the place so you can get out and play.
 
 # Install
 
-When accessing the [page](https://pick-up-1.firebaseapp.com) with your Android smartphone, you may select the "Add to Home Screen" button on the Chrome menu to access it as a regular app. For desktop Chrome you may go to Menu and then "Install Pick-up" to add it to your desktop. As for iOS support, it is still just starting out, but you may access the site, then go to the menu, then "Share", and "Add to Homescreen" and you will be good to go.
+When accessing the [page](shootforteams.com) with your Android smartphone, you may select the "Add to Home Screen" button on the Chrome menu to access it as a regular app. For desktop Chrome you may go to Menu and then "Install Shoot For Teams" to add it to your desktop. As for iOS support, it is still just starting out, but you may access the site, then go to the menu, then "Share", and "Add to Homescreen" and you will be good to go.
 
 # Usage
 
