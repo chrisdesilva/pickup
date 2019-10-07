@@ -36,6 +36,7 @@ class AddCourt extends React.Component {
   state = {
       name: '',
       address: '',
+      rating: '',
       zip: '',
       image: '',
       latitude: 0,
@@ -73,6 +74,7 @@ class AddCourt extends React.Component {
     db.collection('courts').add({
       name: this.state.name,
       address: this.state.address,
+      rating: this.state.rating,
       zip: this.state.zip,
       image: this.state.image,
       latitude: Number(this.state.latitude),
@@ -90,6 +92,7 @@ class AddCourt extends React.Component {
     this.setState({
       name: '',
       address: '',
+      rating: '',
       zip: '',
       image: '',
       latitude: 0,
@@ -131,6 +134,16 @@ class AddCourt extends React.Component {
                   width={16}
                   required
                 />
+              <Form.Group>
+                <Form.Input
+                  placeholder='Court rating from 1 to 5'
+                  name='rating'
+                  value={this.state.rating}
+                  onChange={this.handleChange}
+                  width={16}
+                  required
+                />
+              </Form.Group>
               </Form.Group>
               <Form.Group>
                 <Form.Input

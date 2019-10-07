@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
 import FindACourt from "./FindACourt"
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
 const API_KEY = `${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`;
@@ -44,8 +46,10 @@ class Map extends Component {
       .then(querySnapshot => {
         const Courts = []
         querySnapshot.forEach(function(doc) {
+          console.log('doc: ' + doc.data().gameDateTime);
           Courts.push({
             address: doc.data().address,
+            rating: doc.data().rating,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -56,6 +60,7 @@ class Map extends Component {
             id: doc.id
           })
         })
+        console.log('courts.length: ' + Courts.length)
         this.setState({ Courts })
       })
       .catch(function(error) {
@@ -70,6 +75,7 @@ class Map extends Component {
         querySnapshot.forEach(function(doc) {
           Courts.push({
             address: doc.data().address,
+            rating: doc.data().rating,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -103,6 +109,7 @@ class Map extends Component {
               lng={court.longitude}
               name={court.name}
               address={court.address}
+              rating={court.rating}
               image={court.image}
               url={court.mapsURL}
               gameDateTime={court.gameDateTime}

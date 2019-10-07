@@ -104,6 +104,7 @@ class CourtModal extends React.Component {
         <Modal.Description>
             <Header>{this.props.name}</Header>
             <p>{this.props.address}</p>
+            <p><b>Rating (out of 10): </b>{this.props.rating}</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>
