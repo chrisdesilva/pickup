@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Image, Modal, Input } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { firebase, googleAuthProvider } from '../fire'
 import db from '../fire'
@@ -29,6 +29,8 @@ class CourtModal extends React.Component {
     loggedIn: null,
     dateTime: null,
     dates: [],
+    rating: 0,
+    ratings: [],
     deleteDate: null
   }
 
@@ -36,6 +38,33 @@ class CourtModal extends React.Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
+  }
+
+  // handle rating
+  handleRating = e => {
+    e.preventDefault();
+    db.collection('courts').doc(this.props.id).update({
+      ratings: firebase.firestore.FieldValue.arrayUnion(parseInt(this.state.rating))
+    })
+    //calculate average
+    let thisDoc = db.collection('courts').doc(this.props.id);
+    thisDoc.get().then(function(doc) {
+      if (doc.exists) {
+        let ratings = doc.data().ratings;
+        let ratingsSum = 0;
+        for (let i = 0; i < ratings.length; i++) {
+          console.log('ge4ts here');
+          ratingsSum += ratings[i];
+          console.log(ratingsSum);
+        }
+        let ratingsAvg = ratingsSum / ratings.length;
+        console.log('ratings avg: ' + ratingsAvg);
+      }
+    })
+    this.setState({
+      rating: '',
+      ratings: [...this.state.ratings, this.state.rating]
+    })
   }
 
   // get document from firestore by id via props, add new game to array, update state to immediately display new game
@@ -104,7 +133,7 @@ class CourtModal extends React.Component {
         <Modal.Description>
             <Header>{this.props.name}</Header>
             <p>{this.props.address}</p>
-            <p><b>Rating (out of 10): </b>{this.props.rating}</p>
+            <p><b>Rating (out of 5): </b>{this.props.rating}</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>
@@ -134,6 +163,15 @@ class CourtModal extends React.Component {
                          </li> 
                 }) : "None"} 
               </p>
+            </Form>
+            <Form onSubmit={this.handleRating}>
+                <Input>
+                <label>
+                  Rating:
+                  <Input type="text" value={this.state.rating} name="rating" onChange={ e => this.setState({ rating : e.target.value }) }/>
+                </label>
+                <Input type="submit" value="Submit" />
+                </Input>
             </Form>
           </Modal.Actions> 
         }
