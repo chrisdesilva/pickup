@@ -112,11 +112,11 @@ class AddCourt extends React.Component {
           <Grid.Column>
             <Form onSubmit={this.addCourt} style={style.form}>
               <Form.Group>
-                <Form.Input 
-                  placeholder='Name of court' 
-                  name='name' 
-                  value={this.state.name} 
-                  onChange={this.handleChange} 
+                <Form.Input
+                  placeholder='Name of court'
+                  name='name'
+                  value={this.state.name}
+                  onChange={this.handleChange}
                   width={16}
                   required
                 />
@@ -151,7 +151,7 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
-            </Form> 
+            </Form>
             <div style={style.button} >
               {!this.state.submitReady ? <Button color="red" onClick={this.getLatAndLng} content='Click To Confirm Address'/> : <Button color="green" onClick={this.addCourt} content='Click To Submit Court' secondary />}
             </div>
@@ -164,7 +164,7 @@ class AddCourt extends React.Component {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Container> 
+    </Container>
     )
   }
 }

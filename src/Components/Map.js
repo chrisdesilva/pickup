@@ -108,8 +108,8 @@ class Map extends Component {
               gameDateTime={court.gameDateTime}
               id={court.id}
             />
-             
-            } 
+
+            }
           )}
           <MyLocation lat={this.state.center.lat} lng={this.state.center.lng} />
         </GoogleMapReact>

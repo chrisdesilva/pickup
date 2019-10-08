@@ -5,12 +5,12 @@ import 'firebase/firestore'
 
 const config = {
   apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
-  authDomain: "pick-up-1.firebaseapp.com",
-  databaseURL: "https://pick-up-1.firebaseio.com",
-  projectId: "pick-up-1",
-  storageBucket: "pick-up-1.appspot.com",
-  messagingSenderId: "685399764272",
-  appId: "1:685399764272:web:e4b4c044ec3737c3"
+  authDomain: "pickup-93fa2.firebaseapp.com",
+  databaseURL: "https://pickup-93fa2.firebaseio.com",
+  projectId: "pickup-93fa2",
+  storageBucket: "pickup-93fa2.appspot.com",
+  messagingSenderId: "77922381802",
+  appId: "1:77922381802:web:2d76c18228c4e2e7f50c93"
 }
 
 firebase.initializeApp(config);
@@ -18,5 +18,4 @@ firebase.initializeApp(config);
 const db = firebase.firestore()
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export { firebase, googleAuthProvider, db as default } 
-
+export { firebase, googleAuthProvider, db as default }
