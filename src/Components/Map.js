@@ -131,6 +131,11 @@ class Map extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
+                <p>Here's where we'll sort games?</p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
                 <Link to="/">
                   <Button secondary animated>
                     <Button.Content visible>Home Page</Button.Content>
