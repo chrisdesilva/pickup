@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import { Button, Grid, Icon } from "semantic-ui-react"
+import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
@@ -131,7 +132,21 @@ class Map extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p>Here's where we'll sort games?</p>
+                <p>Find courts with games between these dates and times:</p>
+                  <DateTimeInput
+                    name="startDate"
+                    dateTimeFormat={'MMMM Do YYYY, h:mm a'}
+                    popupPosition={'bottom center'}
+                    placeholder="From"
+                    iconPosition="left"
+                  />
+                  <DateTimeInput
+                    name="endDate"
+                    dateTimeFormat={'MMMM Do YYYY, h:mm a'}
+                    popupPosition={'bottom center'}
+                    placeholder="To"
+                    iconPosition="left"
+                  />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
