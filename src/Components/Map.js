@@ -28,26 +28,9 @@ class Map extends Component {
     loggedIn: null,
     Courts: [],
     startDate: null,
-    endDate: null
+    endDate: null,
+    filter: false
   };
-
-  handleChange = (event, {name, value}) => {
-    if (this.state.hasOwnProperty(name)) {
-      this.setState({ [name]: value });
-    }
-  }
-
-  handleFilterCourts = e => {
-    e.preventDefault()
-    console.log("Filtered!")
-    // db.collection('courts').doc(this.props.id).update({
-    //   dateTime: firebase.firestore.FieldValue.arrayUnion(this.state.dateTime)
-    // })
-    // this.setState({
-    //   dateTime: '',
-    //   dates: [...this.state.dates, this.state.dateTime]
-    // })
-  }
 
   // get current user location and set map to center on that location
   componentDidMount() {
@@ -84,28 +67,63 @@ class Map extends Component {
       })
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevState, prevProps) {
     db.collection('courts').get()
       .then(querySnapshot => {
         const Courts = []
-        querySnapshot.forEach(function(doc) {
-          Courts.push({
-            address: doc.data().address,
-            image: doc.data().image,
-            latitude: doc.data().latitude,
-            longitude: doc.data().longitude,
-            mapsURL: doc.data().mapsURL,
-            name: doc.data().name,
-            zip: doc.data().zip,
-            gameDateTime: doc.data().dateTime,
-            id: doc.id
+        // trying to see if we can build Courts dependent on whether state.filter
+        // is true/false. Better to handle all in handleFilterCourts somehow?
+        if (this.state.filter === true && prevState.filter === false) {
+          console.log("state: ", this.state.filter)
+          querySnapshot.forEach(function(doc) {
+            Courts.push({
+              address: doc.data().address,
+              image: doc.data().image,
+              latitude: doc.data().latitude,
+              longitude: doc.data().longitude,
+              mapsURL: doc.data().mapsURL,
+              name: doc.data().name,
+              zip: doc.data().zip,
+              gameDateTime: doc.data().dateTime,
+              id: doc.id
+            })
           })
-        })
+        } else {
+          querySnapshot.forEach(function(doc) {
+            Courts.push({
+              address: doc.data().address,
+              image: doc.data().image,
+              latitude: doc.data().latitude,
+              longitude: doc.data().longitude,
+              mapsURL: doc.data().mapsURL,
+              name: doc.data().name,
+              zip: doc.data().zip,
+              gameDateTime: doc.data().dateTime,
+              id: doc.id
+            })
+          })
+        }
         this.setState({ Courts })
+        this.setState({
+          filter: false
+        })
       })
       .catch(function(error) {
         console.log(error)
       })
+  }
+
+  handleChange = (event, {name, value}) => {
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
+  }
+
+  handleFilterCourts = e => {
+    e.preventDefault()
+    this.setState({
+      filter: true
+    })
   }
 
   render() {
