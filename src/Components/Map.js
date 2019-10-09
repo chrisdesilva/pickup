@@ -32,10 +32,21 @@ class Map extends Component {
   };
 
   handleChange = (event, {name, value}) => {
-    // debugger
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
+  }
+
+  handleFilterCourts = e => {
+    e.preventDefault()
+    console.log("Filtered!")
+    // db.collection('courts').doc(this.props.id).update({
+    //   dateTime: firebase.firestore.FieldValue.arrayUnion(this.state.dateTime)
+    // })
+    // this.setState({
+    //   dateTime: '',
+    //   dates: [...this.state.dates, this.state.dateTime]
+    // })
   }
 
   // get current user location and set map to center on that location
@@ -164,8 +175,8 @@ class Map extends Component {
                     iconPosition="left"
                     onChange={this.handleChange}
                   />
-                {this.state.startDate && this.state.endDate && <Modal trigger={<Button secondary type="submit">Filter Courts</Button>} basic size="small">
-                      <Modal.Description><p style={{textAlign: 'center'}}>Courts filtered</p></Modal.Description>
+                  {this.state.startDate && this.state.endDate && <Modal trigger={<Button secondary type="submit" onClick={this.handleFilterCourts}>Filter Courts</Button>} basic size="small">
+                    <Modal.Description><p style={{textAlign: 'center'}}>Courts filtered</p></Modal.Description>
                   </Modal>}
               </Grid.Column>
             </Grid.Row>
