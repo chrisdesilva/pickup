@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Button, Grid, Icon } from "semantic-ui-react"
+import { Button, Grid, Icon, Modal } from "semantic-ui-react"
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { Link } from 'react-router-dom'
 import db from '../fire'
@@ -26,8 +26,17 @@ class Map extends Component {
     },
     showCourts: false,
     loggedIn: null,
-    Courts: []
+    Courts: [],
+    startDate: null,
+    endDate: null
   };
+
+  handleChange = (event, {name, value}) => {
+    // debugger
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
+  }
 
   // get current user location and set map to center on that location
   componentDidMount() {
@@ -134,19 +143,30 @@ class Map extends Component {
               <Grid.Column>
                 <p>Find courts with games between these dates and times:</p>
                   <DateTimeInput
+                    clearable
+                    clearIcon={<Icon name="remove" color="red" />}
                     name="startDate"
+                    value={this.state.startDate}
                     dateTimeFormat={'MMMM Do YYYY, h:mm a'}
                     popupPosition={'bottom center'}
                     placeholder="From"
                     iconPosition="left"
+                    onChange={this.handleChange}
                   />
                   <DateTimeInput
+                    clearable
+                    clearIcon={<Icon name="remove" color="red" />}
                     name="endDate"
+                    value={this.state.endDate}
                     dateTimeFormat={'MMMM Do YYYY, h:mm a'}
                     popupPosition={'bottom center'}
                     placeholder="To"
                     iconPosition="left"
+                    onChange={this.handleChange}
                   />
+                {this.state.startDate && this.state.endDate && <Modal trigger={<Button secondary type="submit">Filter Courts</Button>} basic size="small">
+                      <Modal.Description><p style={{textAlign: 'center'}}>Courts filtered</p></Modal.Description>
+                  </Modal>}
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
