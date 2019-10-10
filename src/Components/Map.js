@@ -31,7 +31,8 @@ class Map extends Component {
     loggedIn: null,
     Courts: [],
     startDate: null,
-    endDate: null
+    endDate: null,
+    filter: false
   };
 
   // get current user location and set map to center on that location
@@ -70,21 +71,48 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
+
+    const start = moment(this.state.startDate, "MMMM Do YYYY, h:mm a")
+    const end = moment(this.state.endDate, "MMMM Do YYYY, h:mm a")
+    const range = moment.range(start, end)
+
     db.collection('courts').get()
       .then(querySnapshot => {
         const Courts = []
         querySnapshot.forEach(function(doc) {
-          Courts.push({
-            address: doc.data().address,
-            image: doc.data().image,
-            latitude: doc.data().latitude,
-            longitude: doc.data().longitude,
-            mapsURL: doc.data().mapsURL,
-            name: doc.data().name,
-            zip: doc.data().zip,
-            gameDateTime: doc.data().dateTime,
-            id: doc.id
-          })
+          // Check to see if a valid range was created. If so, Courts can be
+          // filtered to only include courts with a game date/time contained in
+          // the range.
+          if (range.start._isValid && range.end._isValid) {
+            for (let game of doc.data().dateTime) {
+              if (range.contains(moment(game, "MMMM Do YYYY, h:mm a"))) {
+                Courts.push({
+                  address: doc.data().address,
+                  image: doc.data().image,
+                  latitude: doc.data().latitude,
+                  longitude: doc.data().longitude,
+                  mapsURL: doc.data().mapsURL,
+                  name: doc.data().name,
+                  zip: doc.data().zip,
+                  gameDateTime: doc.data().dateTime,
+                  id: doc.id
+                })
+              }
+            }
+          } else {
+          // If the range isn't valid, Courts will be set to all courts.
+            Courts.push({
+              address: doc.data().address,
+              image: doc.data().image,
+              latitude: doc.data().latitude,
+              longitude: doc.data().longitude,
+              mapsURL: doc.data().mapsURL,
+              name: doc.data().name,
+              zip: doc.data().zip,
+              gameDateTime: doc.data().dateTime,
+              id: doc.id
+            })
+          }
         })
 
         this.setState({ Courts })
@@ -98,41 +126,6 @@ class Map extends Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
-  }
-
-  handleFilterCourts = e => {
-    e.preventDefault()
-    console.log("filter")
-    const start = moment(this.state.startDate, "MMMM Do YYYY, h:mm a")
-    const end = moment(this.state.endDate, "MMMM Do YYYY, h:mm a")
-    const range = moment.range(start, end)
-    
-    db.collection('courts').get()
-      .then(querySnapshot => {
-        const Courts = []
-        querySnapshot.forEach(function(doc) {
-          for (let game of doc.data().dateTime) {
-            if (range.contains(moment(game, "MMMM Do YYYY, h:mm a"))) {
-              Courts.push({
-                address: doc.data().address,
-                image: doc.data().image,
-                latitude: doc.data().latitude,
-                longitude: doc.data().longitude,
-                mapsURL: doc.data().mapsURL,
-                name: doc.data().name,
-                zip: doc.data().zip,
-                gameDateTime: doc.data().dateTime,
-                id: doc.id
-              })
-            }
-          }
-        })
-
-        this.setState({ Courts })
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
   }
 
   render() {
@@ -179,7 +172,7 @@ class Map extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p>Find courts with games between these dates and times:</p>
+                <p>Display only courts with games between these dates and times:</p>
                   <DateTimeInput
                     clearable
                     clearIcon={<Icon name="remove" color="red" />}
@@ -202,9 +195,7 @@ class Map extends Component {
                     iconPosition="left"
                     onChange={this.handleChange}
                   />
-                  {this.state.startDate && this.state.endDate && <Modal trigger={<Button secondary type="submit" onClick={this.handleFilterCourts}>Filter Courts</Button>} basic size="small">
-                    <Modal.Description><p style={{textAlign: 'center'}}>Courts filtered</p></Modal.Description>
-                  </Modal>}
+                <p>Clear inputs to see all courts</p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
