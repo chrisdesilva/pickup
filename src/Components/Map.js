@@ -192,6 +192,7 @@ class Map extends Component {
                     popupPosition={'bottom center'}
                     placeholder="To"
                     iconPosition="left"
+                    minDate={this.state.startDate}
                     onChange={this.handleChange}
                   />
                 <p>Clear inputs to see all courts</p>
