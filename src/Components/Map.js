@@ -98,36 +98,41 @@ class Map extends Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
-    debugger
   }
 
   handleFilterCourts = e => {
     e.preventDefault()
     console.log("filter")
+    const start = moment(this.state.startDate, "MMMM Do YYYY, h:mm a")
+    const end = moment(this.state.endDate, "MMMM Do YYYY, h:mm a")
+    const range = moment.range(start, end)
+    
+    db.collection('courts').get()
+      .then(querySnapshot => {
+        const Courts = []
+        querySnapshot.forEach(function(doc) {
+          for (let game of doc.data().dateTime) {
+            if (range.contains(moment(game, "MMMM Do YYYY, h:mm a"))) {
+              Courts.push({
+                address: doc.data().address,
+                image: doc.data().image,
+                latitude: doc.data().latitude,
+                longitude: doc.data().longitude,
+                mapsURL: doc.data().mapsURL,
+                name: doc.data().name,
+                zip: doc.data().zip,
+                gameDateTime: doc.data().dateTime,
+                id: doc.id
+              })
+            }
+          }
+        })
 
-    // db.collection('courts').get()
-    //   .then(querySnapshot => {
-    //     const Courts = []
-    //     querySnapshot.forEach(function(doc) {
-    //       if (doc.data().dateTime)
-    //       Courts.push({
-    //         address: doc.data().address,
-    //         image: doc.data().image,
-    //         latitude: doc.data().latitude,
-    //         longitude: doc.data().longitude,
-    //         mapsURL: doc.data().mapsURL,
-    //         name: doc.data().name,
-    //         zip: doc.data().zip,
-    //         gameDateTime: doc.data().dateTime,
-    //         id: doc.id
-    //       })
-    //     })
-    //
-    //     this.setState({ Courts })
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error)
-    //   })
+        this.setState({ Courts })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
 
   render() {
