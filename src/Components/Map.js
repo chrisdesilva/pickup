@@ -31,8 +31,7 @@ class Map extends Component {
     loggedIn: null,
     Courts: [],
     startDate: null,
-    endDate: null,
-    filter: false
+    endDate: null
   };
 
   // get current user location and set map to center on that location
