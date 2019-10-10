@@ -40,6 +40,7 @@ class AddCourt extends React.Component {
       image: '',
       latitude: 0,
       longitude: 0,
+      description:'',
       mapsURL: 'https://maps.google.com?q=',
       submitReady: false,
       showConfirmMsg: false
@@ -75,6 +76,7 @@ class AddCourt extends React.Component {
       address: this.state.address,
       zip: this.state.zip,
       image: this.state.image,
+      description : this.state.description;
       latitude: Number(this.state.latitude),
       longitude: Number(this.state.longitude),
       mapsURL: this.state.mapsURL + this.state.address + this.state.zip
@@ -95,6 +97,7 @@ class AddCourt extends React.Component {
       latitude: 0,
       longitude: 0,
       mapsURL: '',
+        description:'';
       submitReady: false,
       showConfirmMsg: true
     })
@@ -142,6 +145,16 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  placeholder='Description'
+                  name='description'
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                  width={16}
+                  required
+                />
+              </Form.Group>     
               <Form.Group>
                 <Form.Input
                   placeholder="Copy and paste image url"
