@@ -12,7 +12,7 @@ const FindACourt = props => {
         image={props.image}
         name={props.name}
         address={props.address}
-        rating={props.rating}
+        avgRating={props.avgRating}
         url={props.url}
         lat={props.lat}
         lng={props.lng}

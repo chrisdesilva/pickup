@@ -49,7 +49,7 @@ class Map extends Component {
           console.log('doc: ' + doc.data().gameDateTime);
           Courts.push({
             address: doc.data().address,
-            rating: doc.data().rating,
+            avgRating: doc.data().avgRating,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -75,7 +75,7 @@ class Map extends Component {
         querySnapshot.forEach(function(doc) {
           Courts.push({
             address: doc.data().address,
-            rating: doc.data().rating,
+            avgRating: doc.data().avgRating,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -109,7 +109,7 @@ class Map extends Component {
               lng={court.longitude}
               name={court.name}
               address={court.address}
-              rating={court.rating}
+              avgRating={court.avgRating}
               image={court.image}
               url={court.mapsURL}
               gameDateTime={court.gameDateTime}

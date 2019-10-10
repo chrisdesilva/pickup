@@ -53,12 +53,12 @@ class CourtModal extends React.Component {
         let ratings = doc.data().ratings;
         let ratingsSum = 0;
         for (let i = 0; i < ratings.length; i++) {
-          console.log('ge4ts here');
           ratingsSum += ratings[i];
-          console.log(ratingsSum);
         }
         let ratingsAvg = ratingsSum / ratings.length;
-        console.log('ratings avg: ' + ratingsAvg);
+        thisDoc.update({
+          avgRating: ratingsAvg
+        })
       }
     })
     this.setState({
@@ -133,7 +133,7 @@ class CourtModal extends React.Component {
         <Modal.Description>
             <Header>{this.props.name}</Header>
             <p>{this.props.address}</p>
-            <p><b>Rating (out of 5): </b>{this.props.rating}</p>
+            <p><b>Averate Rating (out of 5): </b>{this.props.avgRating}</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>

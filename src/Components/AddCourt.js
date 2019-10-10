@@ -36,7 +36,8 @@ class AddCourt extends React.Component {
   state = {
       name: '',
       address: '',
-      rating: '',
+      avgRating: 0,
+      ratings: [],
       zip: '',
       image: '',
       latitude: 0,
@@ -47,6 +48,8 @@ class AddCourt extends React.Component {
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  handleNumberChange = (e, { name, value }) => this.setState({ [name]: parseInt(value)})
 
   // calculate latitude and longitude when user clicks confirm button, then switch button to submit by updating submitReady
   getLatAndLng = () => Geocode.fromAddress(this.state.address).then(
@@ -70,11 +73,14 @@ class AddCourt extends React.Component {
 
   // make reference to courts collection on Firebase, add state object to database
   addCourt = e => {
+    let numRating = parseInt(this.state.avgRating);
+    this.state.ratings.push(numRating);
     e.preventDefault()
     db.collection('courts').add({
       name: this.state.name,
       address: this.state.address,
-      rating: this.state.rating,
+      avgRating: numRating,
+      ratings: this.state.ratings,
       zip: this.state.zip,
       image: this.state.image,
       latitude: Number(this.state.latitude),
@@ -92,7 +98,8 @@ class AddCourt extends React.Component {
     this.setState({
       name: '',
       address: '',
-      rating: '',
+      avgRating: 0,
+      ratings: [],
       zip: '',
       image: '',
       latitude: 0,
@@ -134,16 +141,6 @@ class AddCourt extends React.Component {
                   width={16}
                   required
                 />
-              <Form.Group>
-                <Form.Input
-                  placeholder='Court rating from 1 to 5'
-                  name='rating'
-                  value={this.state.rating}
-                  onChange={this.handleChange}
-                  width={16}
-                  required
-                />
-              </Form.Group>
               </Form.Group>
               <Form.Group>
                 <Form.Input
@@ -160,6 +157,16 @@ class AddCourt extends React.Component {
                   placeholder="Copy and paste image url"
                   name='image'
                   value={this.state.image}
+                  onChange={this.handleChange}
+                  width={16}
+                  required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  placeholder='Rating from 1 to 5'
+                  name='avgRating'
+                  value={this.state.avgRating}
                   onChange={this.handleChange}
                   width={16}
                   required
