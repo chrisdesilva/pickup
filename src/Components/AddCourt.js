@@ -5,7 +5,7 @@ import db from '../fire'
 import storage from '../fire';
 import courtPhoto from '../Images/beach-court.jpg'
 
-Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`)
+Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)
 
 const style = {
   header: {
@@ -33,15 +33,14 @@ const style = {
 }
 
 class AddCourt extends React.Component {
-
+  fileInput = React.createRef();
   state = {
       name: '',
       address: '',
       zip: '',
-      image: '',
+      image: '', /*---> I used this state property to add imageUrl*/
       latitude: 0,
       longitude: 0,
-      description:'',
       mapsURL: 'https://maps.google.com?q=',
       submitReady: false,
       showConfirmMsg: false,
@@ -72,47 +71,47 @@ class AddCourt extends React.Component {
     }
   )
 
-    /*Used when detect a change in the input file DOM Element and then do the magic in firebase storage */
-    updatedFile = () => {
-      console.log("---> Detecting files...", this.fileInput.current.files);
-      //Get image
-      const image = this.fileInput.current.files[0];
-      //Check if user tricked us so if he/she tried to trick us then exit the function
-      if(image == undefined){
-        alert("You have to select and image");
-        return true;
-      }
-      //Restrict the files, only image files
-      console.log("---> ", image.type);
-      if(!image.type.includes("image/")){
-        alert("You've selected a wrong format");
-        return true;
-      }
-      //Show the loading icon in the upload button
-      this.setState({isUploading: true});
-      console.log("---> Image detected", image);
-      //Some firebase thing, all of this is in documentation, it is easy
-      const storageRef = storage.ref();
-      const imageToUpload = storageRef.child(image.name);
-      imageToUpload.put(image).then((snapshot) => {
-        console.log("---> DEBUG INFO:",snapshot);
-        imageToUpload.getDownloadURL().then((url) => {
-          console.log("---> URL of the image:", url);
-          //Set the url of the image, hide the loading icon, and change the button text
-          this.setState({image: url, isUploading: false, uploadButtonText: "Image uploaded correctly"});
-        }).catch((err) => {
-          //Hide the loading icon and display an error in the button
-          this.setState({isUploading: false, uploadButtonText: "An error occurred uploading, please try again"});
-          throw new Error(err);
-        })
+  /*Used when detect a change in the input file DOM Element and then do the magic in firebase storage */
+  updatedFile = () => {
+    console.log("---> Detecting files...", this.fileInput.current.files);
+    //Get image
+    const image = this.fileInput.current.files[0];
+    //Check if user tricked us so if he/she tried to trick us then exit the function
+    if(image == undefined){
+      alert("You have to select and image");
+      return true;
+    }
+    //Restrict the files, only image files
+    console.log("---> ", image.type);
+    if(!image.type.includes("image/")){
+      alert("You've selected a wrong format");
+      return true;
+    }
+    //Show the loading icon in the upload button
+    this.setState({isUploading: true});
+    console.log("---> Image detected", image);
+    //Some firebase thing, all of this is in documentation, it is easy
+    const storageRef = storage.ref();
+    const imageToUpload = storageRef.child(image.name);
+    imageToUpload.put(image).then((snapshot) => {
+      console.log("---> DEBUG INFO:",snapshot);
+      imageToUpload.getDownloadURL().then((url) => {
+        console.log("---> URL of the image:", url);
+        //Set the url of the image, hide the loading icon, and change the button text
+        this.setState({image: url, isUploading: false, uploadButtonText: "Image uploaded correctly"});
       }).catch((err) => {
-        //Hide the loading and display an error in the button
+        //Hide the loading icon and display an error in the button
         this.setState({isUploading: false, uploadButtonText: "An error occurred uploading, please try again"});
         throw new Error(err);
       })
-    }
+    }).catch((err) => {
+      //Hide the loading and display an error in the button
+      this.setState({isUploading: false, uploadButtonText: "An error occurred uploading, please try again"});
+      throw new Error(err);
+    })
+  }
 
-      /*Function that will show the text field for enter the URL of the image or to show the upload image button from your device*/
+  /*Function that will show the text field for enter the URL of the image or to show the upload image button from your device*/
   LocalOrURL = (e,data) => {
     if(data.value == "remote"){
       this.setState({localUpload: false});
@@ -129,14 +128,12 @@ class AddCourt extends React.Component {
       address: this.state.address,
       zip: this.state.zip,
       image: this.state.image,
-      description : this.state.description,
       latitude: Number(this.state.latitude),
       longitude: Number(this.state.longitude),
       mapsURL: this.state.mapsURL + this.state.address + this.state.zip
     })
     .then(function(docRef) {
       console.log("ID: ", docRef.id)
-      document.location.href = '/courts';
     })
     .catch(function(error) {
       console.error("Error: ", error)
@@ -150,9 +147,8 @@ class AddCourt extends React.Component {
       latitude: 0,
       longitude: 0,
       mapsURL: '',
-      description:'',
       submitReady: false,
-      showConfirmMsg: true
+      showConfirmMsg: true,
     })
   }
 
@@ -198,16 +194,6 @@ class AddCourt extends React.Component {
                   required
                 />
               </Form.Group>
-              <Form.Group>
-                <Form.Input
-                  placeholder='Description'
-                  name='description'
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                  width={16}
-                  required
-                />
-              </Form.Group>     
               {/*These are the radio buttons for displaying the input text or the button to upload the file*/}
               <Form.Group>
                 <Form.Field>
@@ -231,9 +217,10 @@ class AddCourt extends React.Component {
               :
               <div>
                 <input accept="image/x-png,image/gif,image/jpeg" ref={this.fileInput} style={{display: "none"}} id="upload" type="file" onChange={() => this.updatedFile()} required/>
-                <Button icon="upload" content={this.state.uploadButtonText} secondary loading={this.state.isUploading} onClick={() => this.fileInput.current.click()} /></div>
+                <Button icon="upload" content={this.state.uploadButtonText} secondary loading={this.state.isUploading} onClick={() => this.fileInput.current.click()} />               </div>
               }
             </Form> 
+            <br />
             <div style={style.button} >
               {!this.state.submitReady ? <Button color="red" onClick={this.getLatAndLng} content='Click To Confirm Address'/> : <Button color="green" onClick={this.addCourt} content='Click To Submit Court' secondary />}
             </div>
