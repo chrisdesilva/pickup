@@ -3,12 +3,15 @@ import GoogleMapReact from "google-map-react";
 import { Button, Grid, Icon, Modal } from "semantic-ui-react"
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { Link } from 'react-router-dom'
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
 import db from '../fire'
 import './Map.css';
 import FindACourt from "./FindACourt"
 
 const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
 const API_KEY = `${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`;
+const moment = extendMoment(Moment);
 
 class Map extends Component {
   static defaultProps = {
@@ -28,8 +31,7 @@ class Map extends Component {
     loggedIn: null,
     Courts: [],
     startDate: null,
-    endDate: null,
-    filter: false
+    endDate: null
   };
 
   // get current user location and set map to center on that location
@@ -67,46 +69,25 @@ class Map extends Component {
       })
   }
 
-  componentDidUpdate(prevState, prevProps) {
+  componentDidUpdate() {
     db.collection('courts').get()
       .then(querySnapshot => {
         const Courts = []
-        // trying to see if we can build Courts dependent on whether state.filter
-        // is true/false. Better to handle all in handleFilterCourts somehow?
-        if (this.state.filter === true && prevState.filter === false) {
-          console.log("state: ", this.state.filter)
-          querySnapshot.forEach(function(doc) {
-            Courts.push({
-              address: doc.data().address,
-              image: doc.data().image,
-              latitude: doc.data().latitude,
-              longitude: doc.data().longitude,
-              mapsURL: doc.data().mapsURL,
-              name: doc.data().name,
-              zip: doc.data().zip,
-              gameDateTime: doc.data().dateTime,
-              id: doc.id
-            })
+        querySnapshot.forEach(function(doc) {
+          Courts.push({
+            address: doc.data().address,
+            image: doc.data().image,
+            latitude: doc.data().latitude,
+            longitude: doc.data().longitude,
+            mapsURL: doc.data().mapsURL,
+            name: doc.data().name,
+            zip: doc.data().zip,
+            gameDateTime: doc.data().dateTime,
+            id: doc.id
           })
-        } else {
-          querySnapshot.forEach(function(doc) {
-            Courts.push({
-              address: doc.data().address,
-              image: doc.data().image,
-              latitude: doc.data().latitude,
-              longitude: doc.data().longitude,
-              mapsURL: doc.data().mapsURL,
-              name: doc.data().name,
-              zip: doc.data().zip,
-              gameDateTime: doc.data().dateTime,
-              id: doc.id
-            })
-          })
-        }
-        this.setState({ Courts })
-        this.setState({
-          filter: false
         })
+
+        this.setState({ Courts })
       })
       .catch(function(error) {
         console.log(error)
@@ -117,13 +98,36 @@ class Map extends Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
+    debugger
   }
 
   handleFilterCourts = e => {
     e.preventDefault()
-    this.setState({
-      filter: true
-    })
+    console.log("filter")
+
+    // db.collection('courts').get()
+    //   .then(querySnapshot => {
+    //     const Courts = []
+    //     querySnapshot.forEach(function(doc) {
+    //       if (doc.data().dateTime)
+    //       Courts.push({
+    //         address: doc.data().address,
+    //         image: doc.data().image,
+    //         latitude: doc.data().latitude,
+    //         longitude: doc.data().longitude,
+    //         mapsURL: doc.data().mapsURL,
+    //         name: doc.data().name,
+    //         zip: doc.data().zip,
+    //         gameDateTime: doc.data().dateTime,
+    //         id: doc.id
+    //       })
+    //     })
+    //
+    //     this.setState({ Courts })
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error)
+    //   })
   }
 
   render() {
