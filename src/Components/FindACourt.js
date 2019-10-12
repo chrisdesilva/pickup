@@ -5,7 +5,7 @@ import './Map.css'
 
 const FindACourt = props => {
 
-
+  //console.log('ratings: ' + props.numRatings)
   return (
     <div>
       <CourtModal 
@@ -13,6 +13,7 @@ const FindACourt = props => {
         name={props.name}
         address={props.address}
         avgRating={props.avgRating}
+        numRatings={props.numRatings}
         url={props.url}
         lat={props.lat}
         lng={props.lng}

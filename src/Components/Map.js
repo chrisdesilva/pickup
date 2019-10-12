@@ -50,6 +50,7 @@ class Map extends Component {
           Courts.push({
             address: doc.data().address,
             avgRating: doc.data().avgRating,
+            ratings: doc.data().ratings,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -76,6 +77,7 @@ class Map extends Component {
           Courts.push({
             address: doc.data().address,
             avgRating: doc.data().avgRating,
+            ratings: doc.data().ratings,
             image: doc.data().image,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
@@ -110,6 +112,7 @@ class Map extends Component {
               name={court.name}
               address={court.address}
               avgRating={court.avgRating}
+              numRatings={court.ratings.length}
               image={court.image}
               url={court.mapsURL}
               gameDateTime={court.gameDateTime}

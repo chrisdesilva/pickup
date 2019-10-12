@@ -36,7 +36,7 @@ class AddCourt extends React.Component {
   state = {
       name: '',
       address: '',
-      avgRating: 0,
+      avgRating: '',
       ratings: [],
       zip: '',
       image: '',
@@ -170,6 +170,7 @@ class AddCourt extends React.Component {
                   onChange={this.handleChange}
                   width={16}
                   required
+                  pattern="[1-5]*"
                 />
               </Form.Group>
             </Form> 

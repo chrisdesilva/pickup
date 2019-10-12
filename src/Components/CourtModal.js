@@ -16,6 +16,10 @@ const style = {
   },
   p: {
     textAlign: 'left'
+  },
+  submitRating: {
+    float: 'left',
+    padding: '0.5em 0 1.5em 0'
   }
 }
 
@@ -23,6 +27,7 @@ class CourtModal extends React.Component {
 
   state = {
     showWeather: false,
+    ratingSubmitted: false,
     temp: '',
     conditions: '',
     error: null,
@@ -43,27 +48,28 @@ class CourtModal extends React.Component {
   // handle rating
   handleRating = e => {
     e.preventDefault();
-    db.collection('courts').doc(this.props.id).update({
-      ratings: firebase.firestore.FieldValue.arrayUnion(parseInt(this.state.rating))
-    })
-    //calculate average
+    let ratingInt = parseInt(this.state.rating);
     let thisDoc = db.collection('courts').doc(this.props.id);
     thisDoc.get().then(function(doc) {
       if (doc.exists) {
         let ratings = doc.data().ratings;
+        ratings.push(ratingInt);
         let ratingsSum = 0;
         for (let i = 0; i < ratings.length; i++) {
           ratingsSum += ratings[i];
         }
         let ratingsAvg = ratingsSum / ratings.length;
+        let roundedAvg = ratingsAvg.toFixed(2);
         thisDoc.update({
-          avgRating: ratingsAvg
+          avgRating: roundedAvg,
+          ratings: ratings
         })
       }
     })
     this.setState({
       rating: '',
-      ratings: [...this.state.ratings, this.state.rating]
+      ratings: [...this.state.ratings, this.state.rating],
+      ratingSubmitted: true
     })
   }
 
@@ -134,6 +140,7 @@ class CourtModal extends React.Component {
             <Header>{this.props.name}</Header>
             <p>{this.props.address}</p>
             <p><b>Averate Rating (out of 5): </b>{this.props.avgRating}</p>
+            <p>{this.props.numRatings} people have rated this court</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>
@@ -164,13 +171,14 @@ class CourtModal extends React.Component {
                 }) : "None"} 
               </p>
             </Form>
-            <Form onSubmit={this.handleRating}>
+            <Form onSubmit={this.handleRating} style={style.submitRating}>
                 <Input>
                 <label>
                   Rating:
-                  <Input type="text" value={this.state.rating} name="rating" onChange={ e => this.setState({ rating : e.target.value }) }/>
+                  <Input type="text" value={this.state.rating} name="rating" pattern="[1-5]*" required onChange={ e => this.setState({ rating : e.target.value }) }/>
                 </label>
                 <Input type="submit" value="Submit" />
+                <p>{!this.state.ratingSubmitted  ? "" : "Successfully submitted rating"}</p>
                 </Input>
             </Form>
           </Modal.Actions> 
