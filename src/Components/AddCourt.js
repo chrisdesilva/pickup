@@ -49,8 +49,6 @@ class AddCourt extends React.Component {
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
-  handleNumberChange = (e, { name, value }) => this.setState({ [name]: parseInt(value)})
-
   // calculate latitude and longitude when user clicks confirm button, then switch button to submit by updating submitReady
   getLatAndLng = () => Geocode.fromAddress(this.state.address).then(
     response => {
@@ -60,6 +58,7 @@ class AddCourt extends React.Component {
         longitude: lng,
         submitReady: true
       })
+      console.log(lat, lng)
     },
     error => {
       this.setState({

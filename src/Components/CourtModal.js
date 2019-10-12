@@ -49,8 +49,9 @@ class CourtModal extends React.Component {
   }
 
   // handle rating by adding the new rating to the collection of ratings and computing the average. 
-  // This is updated to the data store. If a rating field does not exist, it also handles 
-  // the case of adding a new field to the object in the data store. The updated ratingAvg and 
+  // This is updated to the data store. If the rating field does not exist (IE: from courts that existed
+  // before the rating functionality), it also handles the case of adding the new field to the object in 
+  // the data store.
   handleRating = e => {
     e.preventDefault();
     let thisDoc = db.collection('courts').doc(this.props.id);

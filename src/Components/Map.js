@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import db from '../fire'
 import './Map.css';
 import FindACourt from "./FindACourt"
-import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 const MyLocation = () => <Icon circular inverted color="teal" name="map pin" />;
