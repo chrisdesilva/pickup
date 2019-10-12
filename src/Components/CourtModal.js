@@ -17,9 +17,12 @@ const style = {
   p: {
     textAlign: 'left'
   },
-  submitRating: {
+  beforeSubmitRating: {
     float: 'left',
     padding: '0.5em 0 1.5em 0'
+  },
+  afterSubmitRating: {
+    display: 'none'
   }
 }
 
@@ -171,16 +174,16 @@ class CourtModal extends React.Component {
                 }) : "None"} 
               </p>
             </Form>
-            <Form onSubmit={this.handleRating} style={style.submitRating}>
+            <Form onSubmit={this.handleRating} style={ !this.state.ratingSubmitted ? style.beforeSubmitRating : style.afterSubmitRating}>
                 <Input>
                 <label>
-                  Rating:
+                  Rating (1 to 5 scale):
                   <Input type="text" value={this.state.rating} name="rating" pattern="[1-5]*" required onChange={ e => this.setState({ rating : e.target.value }) }/>
                 </label>
                 <Input type="submit" value="Submit" />
-                <p>{!this.state.ratingSubmitted  ? "" : "Successfully submitted rating"}</p>
                 </Input>
             </Form>
+            <p style={style.beforeSubmitRating}>{!this.state.ratingSubmitted  ? "" : "Successfully submitted rating"}</p>
           </Modal.Actions> 
         }
         {!this.state.loggedIn &&
