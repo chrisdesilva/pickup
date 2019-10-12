@@ -4,8 +4,6 @@ import './Map.css'
 
 
 const FindACourt = props => {
-
-  //console.log('ratings: ' + props.numRatings)
   return (
     <div>
       <CourtModal 

@@ -41,12 +41,12 @@ class Map extends Component {
         showCourts: true
       })
     );
+
     // pull data from database to have courts ready for display when component is ready
     db.collection('courts').get()
       .then(querySnapshot => {
         const Courts = []
         querySnapshot.forEach(function(doc) {
-          console.log('doc: ' + doc.data().gameDateTime);
           Courts.push({
             address: doc.data().address,
             avgRating: doc.data().avgRating,
@@ -61,7 +61,6 @@ class Map extends Component {
             id: doc.id
           })
         })
-        console.log('courts.length: ' + Courts.length)
         this.setState({ Courts })
       })
       .catch(function(error) {
@@ -112,7 +111,7 @@ class Map extends Component {
               name={court.name}
               address={court.address}
               avgRating={court.avgRating}
-              numRatings={court.ratings.length}
+              numRatings={court.ratings == null ? 0 : court.ratings.length}
               image={court.image}
               url={court.mapsURL}
               gameDateTime={court.gameDateTime}

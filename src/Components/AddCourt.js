@@ -60,7 +60,6 @@ class AddCourt extends React.Component {
         longitude: lng,
         submitReady: true
       })
-      console.log(lat, lng)
     },
     error => {
       this.setState({
@@ -73,14 +72,12 @@ class AddCourt extends React.Component {
 
   // make reference to courts collection on Firebase, add state object to database
   addCourt = e => {
-    let numRating = parseInt(this.state.avgRating);
-    this.state.ratings.push(numRating);
     e.preventDefault()
     db.collection('courts').add({
       name: this.state.name,
       address: this.state.address,
-      avgRating: numRating,
-      ratings: this.state.ratings,
+      avgRating: Number(this.state.avgRating),
+      ratings: [Number(this.state.avgRating)],
       zip: this.state.zip,
       image: this.state.image,
       latitude: Number(this.state.latitude),
