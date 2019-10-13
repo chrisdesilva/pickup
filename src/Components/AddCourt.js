@@ -1,7 +1,8 @@
 import React from 'react'
 import Geocode from 'react-geocode'
 import { Button, Container, Form, Grid, Header, Image, Message, Checkbox, Loader, Icon} from 'semantic-ui-react'
-import { db, storage } from '../fire'
+import db from '../fire'
+import { storage } from '../fire';
 import courtPhoto from '../Images/beach-court.jpg'
 
 Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)

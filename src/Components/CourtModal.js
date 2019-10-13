@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { firebase, googleAuthProvider } from '../fire'
-import { db } from '../fire'
+import db from '../fire'
 import './Map.css'
 
 const API_KEY = `${process.env.REACT_APP_DARK_SKY_API_KEY}`
