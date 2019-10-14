@@ -37,6 +37,8 @@ class AddCourt extends React.Component {
   state = {
       name: '',
       address: '',
+      avgRating: '',
+      ratings: [],
       zip: '',
       image: '', /*---> I used this state property to add imageUrl*/
       latitude: 0,
@@ -126,6 +128,8 @@ class AddCourt extends React.Component {
     db.collection('courts').add({
       name: this.state.name,
       address: this.state.address,
+      avgRating: Number(this.state.avgRating),
+      ratings: [Number(this.state.avgRating)],
       zip: this.state.zip,
       image: this.state.image,
       latitude: Number(this.state.latitude),
@@ -142,6 +146,8 @@ class AddCourt extends React.Component {
     this.setState({
       name: '',
       address: '',
+      avgRating: 0,
+      ratings: [],
       zip: '',
       image: '',
       latitude: 0,
@@ -213,12 +219,23 @@ class AddCourt extends React.Component {
                   width={16}
                   required
                 />
-              </Form.Group> 
+              </Form.Group>
               :
               <div>
                 <input accept="image/x-png,image/gif,image/jpeg" ref={this.fileInput} style={{display: "none"}} id="upload" type="file" onChange={() => this.updatedFile()} required/>
                 <Button icon="upload" content={this.state.uploadButtonText} secondary loading={this.state.isUploading} onClick={() => this.fileInput.current.click()} />               </div>
               }
+              <Form.Group>
+                <Form.Input
+                  placeholder='Rating from 1 to 5'
+                  name='avgRating'
+                  value={this.state.avgRating}
+                  onChange={this.handleChange}
+                  width={16}
+                  required
+                  pattern="[1-5]*"
+                />
+              </Form.Group>
             </Form> 
             <br />
             <div style={style.button} >

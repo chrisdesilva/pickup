@@ -4,14 +4,14 @@ import './Map.css'
 
 
 const FindACourt = props => {
-
-
   return (
     <div>
       <CourtModal 
         image={props.image}
         name={props.name}
         address={props.address}
+        avgRating={props.avgRating}
+        numRatings={props.numRatings}
         url={props.url}
         lat={props.lat}
         lng={props.lng}
