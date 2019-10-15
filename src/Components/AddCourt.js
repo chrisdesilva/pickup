@@ -5,7 +5,7 @@ import db from '../fire'
 import { storage } from '../fire';
 import courtPhoto from '../Images/beach-court.jpg'
 
-Geocode.setApiKey(`${process.env.REACT_APP_API_KEY}`)
+Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`)
 
 const style = {
   header: {
