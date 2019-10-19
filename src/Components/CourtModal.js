@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Image, Modal, Input } from 'semantic-ui-react'
 import { DateTimeInput } from 'semantic-ui-calendar-react'
 import { firebase, googleAuthProvider } from '../fire'
 import db from '../fire'
@@ -16,6 +16,13 @@ const style = {
   },
   p: {
     textAlign: 'left'
+  },
+  beforeSubmitRating: {
+    float: 'left',
+    padding: '0.5em 0 1.5em 0'
+  },
+  afterSubmitRating: {
+    display: 'none'
   }
 }
 
@@ -23,12 +30,15 @@ class CourtModal extends React.Component {
 
   state = {
     showWeather: false,
+    ratingSubmitted: false,
     temp: '',
     conditions: '',
     error: null,
     loggedIn: null,
     dateTime: null,
     dates: [],
+    rating: 0,
+    ratings: [],
     deleteDate: null
   }
 
@@ -36,6 +46,37 @@ class CourtModal extends React.Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
+  }
+
+  // handle rating by adding the new rating to the collection of ratings and computing the average. 
+  // This is updated to the data store. If the rating field does not exist (IE: from courts that existed
+  // before the rating functionality), it also handles the case of adding the new field to the object in 
+  // the data store.
+  handleRating = e => {
+    e.preventDefault();
+    let thisDoc = db.collection('courts').doc(this.props.id);
+    let rating = parseInt(this.state.rating);
+    thisDoc.get().then(function(doc) {
+      if (doc.exists) {
+        let ratings = doc.data().ratings;
+        if (ratings == null) ratings = [];
+        ratings.push(rating);
+        let ratingsSum = 0;
+        for (let i = 0; i < ratings.length; i++) {
+          ratingsSum += ratings[i];
+        }
+        let ratingsAvg = (ratingsSum / ratings.length).toFixed(2);
+        thisDoc.update({
+          avgRating: ratingsAvg,
+          ratings: ratings
+        })
+      }
+    })
+    this.setState({
+      rating: '',
+      ratings: [...this.state.ratings, this.state.rating],
+      ratingSubmitted: true
+    })
   }
 
   // get document from firestore by id via props, add new game to array, update state to immediately display new game
@@ -104,6 +145,8 @@ class CourtModal extends React.Component {
         <Modal.Description>
             <Header>{this.props.name}</Header>
             <p>{this.props.address}</p>
+            <p><b>Averate Rating (out of 5): </b>{this.props.avgRating}</p>
+            <p>{this.props.numRatings} people have rated this court</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
             {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
         </Modal.Description>
@@ -134,6 +177,16 @@ class CourtModal extends React.Component {
                 }) : "None"} 
               </p>
             </Form>
+            <Form onSubmit={this.handleRating} style={ !this.state.ratingSubmitted ? style.beforeSubmitRating : style.afterSubmitRating}>
+                <Input>
+                <label>
+                  Rating (1 to 5 scale):
+                  <Input type="text" value={this.state.rating} name="rating" pattern="[1-5]*" required onChange={ e => this.setState({ rating : e.target.value }) }/>
+                </label>
+                <Input type="submit" value="Submit" />
+                </Input>
+            </Form>
+            <p style={style.beforeSubmitRating}>{!this.state.ratingSubmitted  ? "" : "Successfully submitted rating"}</p>
           </Modal.Actions> 
         }
         {!this.state.loggedIn &&
