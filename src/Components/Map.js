@@ -55,11 +55,13 @@ class Map extends Component {
             longitude: doc.data().longitude,
             mapsURL: doc.data().mapsURL,
             name: doc.data().name,
+            indoor: doc.data().indoor,
             zip: doc.data().zip,
             gameDateTime: doc.data().dateTime,
             id: doc.id
           })
         })
+        console.log(Courts);
         this.setState({ Courts })
       })
       .catch(function(error) {
@@ -81,6 +83,7 @@ class Map extends Component {
             longitude: doc.data().longitude,
             mapsURL: doc.data().mapsURL,
             name: doc.data().name,
+            indoor: doc.data().indoor,
             zip: doc.data().zip,
             gameDateTime: doc.data().dateTime,
             id: doc.id
@@ -108,6 +111,7 @@ class Map extends Component {
               lat={court.latitude}
               lng={court.longitude}
               name={court.name}
+              indoor={court.indoor}
               address={court.address}
               avgRating={court.avgRating}
               numRatings={court.ratings == null ? 0 : court.ratings.length}

@@ -148,7 +148,8 @@ class CourtModal extends React.Component {
             <p><b>Averate Rating (out of 5): </b>{this.props.avgRating}</p>
             <p>{this.props.numRatings} people have rated this court</p>
             {this.props.url && <a id="mapsLink" href={this.props.url} target="_blank" rel="noopener noreferrer">Open in Maps</a>}
-            {this.state.showWeather && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
+            {this.state.showWeather && !this.props.indoor && <p style={style.weather}>Current weather, <a style={style.a} href="https://darksky.net/poweredby" target="_blank" rel="noreferrer noopener">powered by Dark Sky</a>: {this.state.conditions}, {this.state.temp}°F</p>}
+            {this.props.indoor && <p style={style.weather}>This is an indoor court</p>}
         </Modal.Description>
         </Modal.Content>
         {this.state.loggedIn && 

@@ -9,6 +9,7 @@ const FindACourt = props => {
       <CourtModal 
         image={props.image}
         name={props.name}
+        indoor={props.indoor}
         address={props.address}
         avgRating={props.avgRating}
         numRatings={props.numRatings}
