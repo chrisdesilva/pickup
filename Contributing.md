@@ -19,7 +19,7 @@ You will also need to make use of [Firestore](https://firebase.google.com/docs/f
 9. In the root directory, create a new file called `.env`
 10. Copy the variables from `.env.sample` into your .env file and update with your keys
 11. Run `npm start` to start your dev environment 
-12. Start contributing!
+12. Start contributing and enjoy!
 
 When you're ready to add your changes to the project, submit a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
 
