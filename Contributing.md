@@ -17,7 +17,7 @@ You will also need to make use of [Firestore](https://firebase.google.com/docs/f
   7.3 Push the forked repo to update: `git push origin master`
 8. Run `npm install` to install project dependencies.
 9. In the root directory, create a new file called `.env`
-10. Copy the variables from `.env.sample` into your .env file and update with your keys
+10. Copy the variables from `.env.sample` into your `.env` file and update with your keys
 11. Run `npm start` to start your dev environment 
 12. Start contributing!
 
